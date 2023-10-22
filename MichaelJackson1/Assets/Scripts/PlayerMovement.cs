@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Input
+        //Input sets horizontal/vertical to a value of -1.0 to 1.0, animator uses these values within the parameters to set an animation
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Movement
+        //Movement - FixedUpdate ensures that it is unrelated to FPS and instead runs +- 50 times per second, further optimzed with deltatime
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
