@@ -22,20 +22,20 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("mSpeed", mSpeed);
-        /*  if (movement.x > 0f)
+          if (movement.x > 0f)
           {
               sprite.flipX = true;    
           }
           else if (movement.x < 0f) 
           {
               sprite.flipX = false; 
-          }*/
+          }
 
     }
-/*
+
     private void FixedUpdate()
     {
         //Movement - FixedUpdate ensures that it is unrelated to FPS and instead runs +- 50 times per second, further optimzed with deltatime
         rb.MovePosition(rb.position + movement * mSpeed * Time.fixedDeltaTime);
-    }*/
+    }
 }
