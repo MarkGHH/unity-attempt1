@@ -3,18 +3,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public float walkSpeed = 4.0f;
-    [SerializeField] public float runSpeed = 8.0f;
-    public float speed;
-    public Rigidbody2D rb;
-    public Animator animator;
+    [SerializeField] private float walkSpeed = 4.0f;
+    [SerializeField] private float runSpeed = 8.0f;
+    private float speed;
+    private Rigidbody2D rb;
+    private Animator animator;
     private SpriteRenderer sprite;
-    [SerializeField] private float horizontal;
-    [SerializeField] private float vertical;
-    public bool isWalking;
-    public bool isRunning;
-    public bool isIdle;
-
+    private float horizontal;
+    private float vertical;
 
     private void Start()
     {
@@ -23,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
-    public void Update()
+    private void Update()
     {
         //Is the player moving based on X/Y input
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -31,12 +27,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (horizontal != 0 || vertical != 0)
         {
-            //Set animator parameters based on current speed
+            //Set animator parameters for horizontal and vertical, if the player is trying to move
             animator.SetFloat("Horizontal", horizontal);
             animator.SetFloat("Vertical", vertical);
-            animator.SetFloat("Speed", speed);
 
-            //Handle direction swap in animator
+            //Handle direction swap for side animations (left v. right)
             if (horizontal > 0f)
             {
                 sprite.flipX = true;
@@ -45,27 +40,30 @@ public class PlayerMovement : MonoBehaviour
             {
                 sprite.flipX = false;
             }
+
         }
+        //If the player is not trying to move, set speed to 0f to engage Idle animation
         else
         {
-            isIdle = true;
+            speed = 0f;
         }
+        
+
 
         //If Shift (run) is being pressed, movement speed is doubled
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = runSpeed;
-            isRunning = true;
         }
         else
         {
             speed = walkSpeed;
-            isWalking = true;
         }
         rb.velocity = new UnityEngine.Vector2(horizontal * speed, vertical * speed);
         speed = rb.velocity.magnitude;
+
+        //Pass the speed value outside of if() statements to ensure speed is always updated -> this ensures that the right animation is selected (idle/walk/run), the direction should not be touched in case the player is not trying to move
+        //Pass speed at the end of the frame, so that the speed value of the current frame is being used
+        animator.SetFloat("Speed", speed);
     }
-    //change speed parameter to isMoving, isWalking, isIdle 
-    //still use speed as velocity
-    //set proper animations based on speed
 }
