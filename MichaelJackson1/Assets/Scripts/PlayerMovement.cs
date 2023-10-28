@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     //Movement and animations
     [SerializeField] private float walkSpeed = 4.0f;
     [SerializeField] private float runSpeed = 8.0f;
+    [SerializeField] private Vector2 jumpHeight;
     private float speed;
     private Rigidbody2D rb;
     private Animator animator;
