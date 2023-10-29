@@ -1,64 +1,74 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //Movement and animations
-    [SerializeField] private float walkSpeed = 4.0f;
-    [SerializeField] private float runSpeed = 8.0f;
-    [SerializeField] private Vector2 jumpHeight;
-    private float speed;
+    private float speed = 0f;
+    private float walkSpeed = 4.0f;
+    private float sprintSpeed = 8.0f;
+    private bool isSprinting;
+    private bool isWalking;
+
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
-    private Vector2 playerinput;
+    private PlayerInputActions playerInputActions;
 
-    private void Start()
+    private void Awake()
     {
-        //GetComponent instantiate
-        sprite = GetComponent<SpriteRenderer>(); 
+        //DontDestroyOnLoad(this.gameObject);
+        sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        DontDestroyOnLoad(this.gameObject);
+
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Run.performed += x => isSprinting = true;
+        playerInputActions.Player.Run.canceled += x => isSprinting = false;
+        playerInputActions.Player.Move.performed += x => isWalking = true;
+        playerInputActions.Player.Move.canceled += x => isWalking = false;
     }
     private void FixedUpdate()
     {
-        //Is the player moving based on X/Y input
-        playerinput.x = Input.GetAxisRaw("Horizontal");
-        playerinput.y = Input.GetAxisRaw("Vertical");
-        PlayerAnimation();
+        Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
+        rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
 
-        //Speed calculation including normalization of speed through ClampMagnitude (ensures the speed isn't increased when moving diagonally)
-        //Pass the speed value outside of if() statements to ensure speed is always updated -> this ensures that the right animation is selected (idle/walk/run), the direction should not be touched in case the player is not trying to move
-        playerinput = Vector2.ClampMagnitude(playerinput, 1f);
-        rb.velocity = new Vector2(playerinput.x * speed, playerinput.y * speed);
-        speed = rb.velocity.magnitude;
-        animator.SetFloat("Speed", speed);
-    }
-
-    private void PlayerAnimation()
-    {
-        if (playerinput.x != 0 || playerinput.y != 0) //Is player moving?
+        if (moveDirection.x != 0f || moveDirection.y != 0f)
         {
-            //Pass movement to animator
-            animator.SetFloat("Horizontal", playerinput.x);
-            animator.SetFloat("Vertical", playerinput.y);
+            if (isSprinting)
+            {
+                speed = sprintSpeed;
+            }
+            else if (isWalking)
+            {
+                speed = walkSpeed;
+            }
+            else speed = 0f;
 
-            //Flip sprite based on input
-            if (playerinput.x > 0f)
+            if (moveDirection.x > 0f)
             {
                 sprite.flipX = true;
             }
             else sprite.flipX = false;
         }
-        //If not moving, speed 0
         else speed = 0f;
 
-        //If shift, use runspeed
-        if (Input.GetKey(KeyCode.LeftShift))
+        animator.SetFloat("Speed", speed);
+
+        if (moveDirection.x != 0f || moveDirection.y != 0f)
         {
-            speed = runSpeed;
+            animator.SetFloat("Horizontal", moveDirection.x);
+            animator.SetFloat("Vertical", moveDirection.y);
         }
-        else speed = walkSpeed;        
+    }
+    private void OnEnable()
+    {
+        playerInputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInputActions.Disable();
     }
 }
+
