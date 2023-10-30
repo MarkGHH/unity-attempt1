@@ -8,28 +8,31 @@ public class Interactor : MonoBehaviour
     public LayerMask contactFilter;
     public RaycastHit2D raycastHit;
     private Vector2 raycastDirection;
-    private Vector2 playerinput;
-    private readonly Collider[] colliders = new Collider[3];
+    private PlayerInputActions playerInputActions;
+    private bool isInteracting;
 
-
+    private void Awake()
+    {
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Interact.performed += x => isInteracting = true;
+        playerInputActions.Player.Interact.canceled += x => isInteracting = false;
+    }
     private void FixedUpdate()
     {
         //Raycast direction -> this should replace the direction input (transform.right) using -transform.right/transform.right/-transform.up/transform.up based on which direction the character is facing
+        Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
 
-        playerinput.x = Input.GetAxisRaw("Horizontal");
-        playerinput.y = Input.GetAxisRaw("Vertical");
-
-        if (playerinput.x != 0 || playerinput.y != 0)
+        if (moveDirection.x != 0 || moveDirection.y != 0)
         {
-            if (playerinput.x == 1)
+            if (moveDirection.x == 1)
             {
                 raycastDirection = transform.right;
             }
-            else if (playerinput.x == -1)
+            else if (moveDirection.x == -1)
             {
                 raycastDirection = -transform.right;
             }
-            else if (playerinput.y == 1)
+            else if (moveDirection.y == 1)
             {
                 raycastDirection = transform.up;
             }
@@ -45,11 +48,19 @@ public class Interactor : MonoBehaviour
         if (raycastHit.collider != null)
         {
             var interactable = raycastHit.collider.GetComponent<InteractInterface>();
-            if (interactable != null && Input.GetKey("e"))
+            if (interactable != null && isInteracting == true)
             {
                 interactable.Interact(this);
             }
         }
     }
+    private void OnEnable()
+    {
+        playerInputActions.Enable();
+    }
 
+    private void OnDisable()
+    {
+        playerInputActions.Disable();
+    }
 }
