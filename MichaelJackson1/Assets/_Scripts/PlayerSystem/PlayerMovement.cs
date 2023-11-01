@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private PlayerInputActions playerInputActions;
 
+    public Vector2 Vector2;
+
 
 
     private void Awake()
@@ -63,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", moveDirection.x);
             animator.SetFloat("Vertical", moveDirection.y);
         }
+        Vector2 = new Vector2(moveDirection.x, moveDirection.y);
     }
     private void OnEnable()
     {

@@ -24,19 +24,19 @@ public class Interactor : MonoBehaviour
 
         if (moveDirection.x != 0 || moveDirection.y != 0)
         {
-            if (moveDirection.x == 1)
-            {
-                raycastDirection = transform.right;
-            }
-            else if (moveDirection.x == -1)
-            {
-                raycastDirection = -transform.right;
-            }
-            else if (moveDirection.y == 1)
+            if (moveDirection.y > 0.7f)
             {
                 raycastDirection = transform.up;
             }
-            else raycastDirection = -transform.up;
+            else if (moveDirection.y < -0.7f)
+            {
+                raycastDirection = -transform.up;
+            }
+            else if (moveDirection.x == 1)
+            {
+                raycastDirection = transform.right;
+            }
+            else raycastDirection = -transform.right;
         }
 
         //Perform the raycast
