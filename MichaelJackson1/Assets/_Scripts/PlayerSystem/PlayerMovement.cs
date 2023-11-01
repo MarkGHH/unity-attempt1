@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
     private PlayerInputActions playerInputActions;
+
+
 
     private void Awake()
     {
@@ -66,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         playerInputActions.Disable();
     }
