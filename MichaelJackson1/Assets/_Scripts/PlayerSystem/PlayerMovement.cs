@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
 using UnityEngine.Events;
@@ -11,14 +13,20 @@ public class PlayerMovement : MonoBehaviour
     private bool isSprinting;
     private bool isWalking;
 
+    [SerializeField] private bool canDash = true;
+    [SerializeField] private bool isDashing;
+    private float dashingPower = 20f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+
+    [SerializeField] private TrailRenderer tr;
+
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
     private PlayerInputActions playerInputActions;
 
     public Vector2 Vector2;
-
-
 
     private void Awake()
     {
@@ -33,8 +41,15 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions.Player.Move.performed += x => isWalking = true;
         playerInputActions.Player.Move.canceled += x => isWalking = false;
     }
+
+
     private void FixedUpdate()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
 
@@ -66,6 +81,25 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Vertical", moveDirection.y);
         }
         Vector2 = new Vector2(moveDirection.x, moveDirection.y);
+
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+    }
+    private IEnumerator Dash()
+    {
+        Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector2(moveDirection.x * dashingPower, moveDirection.y * dashingPower); //rb.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * dashingPower);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        isDashing = false;
+        //yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
     private void OnEnable()
     {
@@ -77,4 +111,3 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions.Disable();
     }
 }
-
