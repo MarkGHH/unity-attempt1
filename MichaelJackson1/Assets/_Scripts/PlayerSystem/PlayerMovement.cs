@@ -15,9 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private bool canDash = true;
 
-    private float dashingPower = 20f;
+    private float dashingPower = 17f;
     private float dashingTime = 0.2f;
-    private float dashingCooldown = 0.7f;
+    private float dashingCooldown = 0f;
 
     private TrailRenderer tr;
 
