@@ -43,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions.Player.Move.canceled += x => isWalking = false;
         playerInputActions.Player.Dash.performed += x => isDashing = true;
     }
-
-
     private void FixedUpdate()
     {
         Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
@@ -83,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-
     }
     private IEnumerator Dash()
     {
@@ -96,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
-
     }
     private void OnEnable()
     {
