@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float sprintSpeed = 8.0f;
     private bool isSprinting;
     private bool isWalking;
+    private bool isDashing;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions.Player.Run.canceled += x => isSprinting = false;
         playerInputActions.Player.Move.performed += x => isWalking = true;
         playerInputActions.Player.Move.canceled += x => isWalking = false;
+        playerInputActions.Player.Dash.performed += x => isDashing = true;
+        playerInputActions.Player.Dash.canceled += x => isDashing = false;
     }
     private void FixedUpdate()
     {

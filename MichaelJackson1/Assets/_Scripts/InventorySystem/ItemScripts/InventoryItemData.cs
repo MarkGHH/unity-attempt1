@@ -6,7 +6,7 @@ using UnityEngine;
 public class InventoryItemData : ScriptableObject // Decides what data can be attributed to an item
 {
     public int ID;
-    public Sprite itemIcon;
+    public Sprite Icon;
     public int maxStackSize;
     public string displayName;
     public string typeName;
