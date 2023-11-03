@@ -22,6 +22,17 @@ public class InventorySlot
         itemData = null;
         stackSize = -1;
     }
+
+    public void AssignItem(InventorySlot invSlot)
+    {
+        if (itemData == invSlot.ItemData) AddToStack(invSlot.stackSize);
+        else
+        {
+            itemData = invSlot.itemData;
+            stackSize = 0;
+            AddToStack(invSlot.stackSize);
+        }
+    }
     public bool RoomLeftInStack(int amountToAdd, out int amountRemaining) // Checks the remaining amount including a return of the remaining amount
     {
         amountRemaining = ItemData.maxStackSize - stackSize;
