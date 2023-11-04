@@ -1,64 +1,111 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
-using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
     private float speed = 0f;
     private float walkSpeed = 4.0f;
-    private float sprintSpeed = 8.0f;
-    private bool isSprinting;
-    private bool isWalking;
+    private float runSpeed = 8.0f;
+    private float dashingPower = 17f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+
+    private bool isRunning;
     private bool isDashing;
     private bool canDash = true;
 
-    private float dashingPower = 17f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 0f;
+    private Vector2 moveDirection;
 
     private TrailRenderer tr;
-
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
-    private PlayerInputActions playerInputActions;
+    [SerializeField] private InputReader input;
 
-    public Vector2 Vector2;
+
 
     private void Awake()
     {
-        //DontDestroyOnLoad(this.gameObject);
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
 
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Run.performed += x => isSprinting = true;
-        playerInputActions.Player.Run.canceled += x => isSprinting = false;
-        playerInputActions.Player.Move.performed += x => isWalking = true;
-        playerInputActions.Player.Move.canceled += x => isWalking = false;
-        playerInputActions.Player.Dash.performed += x => isDashing = true;
+        // Subcribe to all the events from the InputReader related to the player and set the function on catch
+        input.MoveEvent += HandleMove;
+        input.RunEvent += HandleRun;
+        input.RunCancelledEvent += HandleRunCancelled;
+        input.DashEvent += HandleDash;
+        input.DashCancelledEvent += HandleDashCancelled;
     }
+
     private void FixedUpdate()
     {
-        Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
+        Move();
+        StartCoroutine(Dash());
+    }
+
+    // Set bools depending on the events received
+    private void HandleMove(Vector2 dir)
+    {
+        moveDirection = dir;
+    }
+    private void HandleRun()
+    {
+        isRunning = true;
+    }
+    private void HandleRunCancelled()
+    {
+        isRunning = false;
+    }
+    private void HandleDash()
+    {
+        isDashing = true;
+    }
+    private void HandleDashCancelled()
+    {
+        isDashing = false;
+    }
+    private void Move() // General player movement
+    {
+        if (moveDirection != Vector2.zero) // If the Vector2 is not equal to (0, 0) then 
+        {
+            if (isRunning)
+            {
+                speed = runSpeed;
+            }
+            else speed = walkSpeed;
+
+        }
+        else speed = 0f;
+
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
 
-        if (moveDirection.x != 0f || moveDirection.y != 0f)
+        Animate();
+    }
+    private IEnumerator Dash()
+    {
+        if (isDashing && canDash) 
         {
-            if (isSprinting)
-            {
-                speed = sprintSpeed;
-            }
-            else if (isWalking)
-            {
-                speed = walkSpeed;
-            }
-            else speed = 0f;
+            rb.velocity = new Vector2(moveDirection.x * dashingPower, moveDirection.y * dashingPower);
+            tr.emitting = true;
+            yield return new WaitForSeconds(dashingTime);
+            tr.emitting = false;
+            isDashing = false;
+            canDash = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            canDash = true;
+        }
+    }
+
+    private void Animate()
+    {
+        animator.SetFloat("Speed", speed);
+        if (moveDirection != Vector2.zero)
+        {
+            animator.SetFloat("Horizontal", moveDirection.x);
+            animator.SetFloat("Vertical", moveDirection.y);
 
             if (moveDirection.x > 0f)
             {
@@ -66,41 +113,5 @@ public class PlayerMovement : MonoBehaviour
             }
             else sprite.flipX = false;
         }
-        else speed = 0f;
-
-        animator.SetFloat("Speed", speed);
-
-        if (moveDirection.x != 0f || moveDirection.y != 0f)
-        {
-            animator.SetFloat("Horizontal", moveDirection.x);
-            animator.SetFloat("Vertical", moveDirection.y);
-        }
-        Vector2 = new Vector2(moveDirection.x, moveDirection.y);
-
-        if (isDashing && canDash)
-        {
-            StartCoroutine(Dash());
-        }
-    }
-    private IEnumerator Dash()
-    {
-        Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
-        rb.velocity = new Vector2(moveDirection.x * dashingPower, moveDirection.y * dashingPower); //rb.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * dashingPower);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        isDashing = false;
-        canDash = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }
-    private void OnEnable()
-    {
-        playerInputActions.Enable();
-    }
-
-    public void OnDisable()
-    {
-        playerInputActions.Disable();
     }
 }

@@ -10,17 +10,20 @@ public class Interactor : MonoBehaviour
     private Vector2 raycastDirection;
     private PlayerInputActions playerInputActions;
     private bool isInteracting;
+    [SerializeField] private InputReader input;
 
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Interact.performed += x => isInteracting = true;
-        playerInputActions.Player.Interact.canceled += x => isInteracting = false;
+        playerInputActions.Gameplay.Interact.performed += x => isInteracting = true;
+        playerInputActions.Gameplay.Interact.canceled += x => isInteracting = false;
+
+        input.InteractEvent += HandleInteract;
     }
     private void FixedUpdate()
     {
         //Raycast direction -> this should replace the direction input (transform.right) using -transform.right/transform.right/-transform.up/transform.up based on which direction the character is facing
-        Vector2 moveDirection = playerInputActions.Player.Move.ReadValue<Vector2>();
+        Vector2 moveDirection = playerInputActions.Gameplay.Move.ReadValue<Vector2>();
 
         if (moveDirection.x != 0 || moveDirection.y != 0)
         {
@@ -54,6 +57,11 @@ public class Interactor : MonoBehaviour
             }
         }
     }
+    private void HandleInteract()
+    {
+        isInteracting = true;
+    }
+
     private void OnEnable()
     {
         playerInputActions.Enable();
