@@ -42,6 +42,7 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     public event Action DashCancelledEvent;
 
     public event Action InteractEvent;
+    public event Action InteractCancelledEvent;
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
@@ -80,6 +81,10 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
         if (context.phase == InputActionPhase.Performed)
         {
             InteractEvent?.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            InteractCancelledEvent?.Invoke();
         }
     }
 

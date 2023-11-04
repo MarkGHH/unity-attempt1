@@ -2244,6 +2244,7 @@ MonoBehaviour:
   contactFilter:
     serializedVersion: 2
     m_Bits: 64
+  input: {fileID: 11400000, guid: 6b5dde591a290d64aababefbaea11225, type: 2}
 --- !u!114 &584579857
 MonoBehaviour:
   m_ObjectHideFlags: 0

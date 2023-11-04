@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         input.RunEvent += HandleRun;
         input.RunCancelledEvent += HandleRunCancelled;
         input.DashEvent += HandleDash;
-        input.DashCancelledEvent += HandleDashCancelled;
     }
 
     private void FixedUpdate()
@@ -63,10 +61,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
     }
-    private void HandleDashCancelled()
-    {
-        isDashing = false;
-    }
+
     private void Move() // General player movement
     {
         if (moveDirection != Vector2.zero) // If the Vector2 is not equal to (0, 0) then 
@@ -86,15 +81,15 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator Dash()
     {
-        if (isDashing && canDash) 
+        if (isDashing && canDash)
         {
             rb.velocity = new Vector2(moveDirection.x * dashingPower, moveDirection.y * dashingPower);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
             tr.emitting = false;
-            isDashing = false;
             canDash = false;
             yield return new WaitForSeconds(dashingCooldown);
+            isDashing = false;
             canDash = true;
         }
     }

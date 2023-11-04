@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Interactor : MonoBehaviour
 {
@@ -8,23 +7,45 @@ public class Interactor : MonoBehaviour
     public LayerMask contactFilter;
     public RaycastHit2D raycastHit;
     private Vector2 raycastDirection;
-    private PlayerInputActions playerInputActions;
     private bool isInteracting;
     [SerializeField] private InputReader input;
 
+    private Vector2 moveDirection;
+
     private void Awake()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Gameplay.Interact.performed += x => isInteracting = true;
-        playerInputActions.Gameplay.Interact.canceled += x => isInteracting = false;
-
+        input.MoveEvent += HandleMove;
         input.InteractEvent += HandleInteract;
+        input.InteractCancelledEvent += HandleInteractCancelled;
     }
     private void FixedUpdate()
     {
-        //Raycast direction -> this should replace the direction input (transform.right) using -transform.right/transform.right/-transform.up/transform.up based on which direction the character is facing
-        Vector2 moveDirection = playerInputActions.Gameplay.Move.ReadValue<Vector2>();
-
+        MoveDirection();
+        PerformRaycast();
+        DrawRaycast();
+        if (raycastHit.collider != null)
+        {
+            var interactable = raycastHit.collider.GetComponent<InteractInterface>();
+            if (interactable != null && isInteracting == true)
+            {
+                interactable.Interact(this);
+            }
+        }
+    }
+    private void HandleInteract()
+    {
+        isInteracting = true;
+    }
+    private void HandleInteractCancelled()
+    {
+        isInteracting = false;
+    }
+    private void HandleMove(Vector2 dir)
+    {
+        moveDirection = dir;
+    }
+    private void MoveDirection()
+    {
         if (moveDirection.x != 0 || moveDirection.y != 0)
         {
             if (moveDirection.y > 0.7f)
@@ -41,34 +62,14 @@ public class Interactor : MonoBehaviour
             }
             else raycastDirection = -transform.right;
         }
-
-        //Perform the raycast
+    }
+    private void PerformRaycast()
+    {
         raycastHit = Physics2D.Raycast(rayObject.transform.position, raycastDirection, rayDistance, contactFilter);
-
-        //Draw the ray
+    }
+    private void DrawRaycast()
+    {
         Debug.DrawRay(rayObject.transform.position, raycastDirection * rayDistance, Color.red);
 
-        if (raycastHit.collider != null)
-        {
-            var interactable = raycastHit.collider.GetComponent<InteractInterface>();
-            if (interactable != null && isInteracting == true)
-            {
-                interactable.Interact(this);
-            }
-        }
-    }
-    private void HandleInteract()
-    {
-        isInteracting = true;
-    }
-
-    private void OnEnable()
-    {
-        playerInputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerInputActions.Disable();
     }
 }
