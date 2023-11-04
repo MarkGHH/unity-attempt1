@@ -4,11 +4,11 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     private float speed = 0f;
-    private float walkSpeed = 4.0f;
-    private float runSpeed = 8.0f;
-    private float dashingPower = 17f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
+    private readonly float walkSpeed = 4.0f;
+    private readonly float runSpeed = 6.0f;
+    private readonly float dashingPower = 17f;
+    private readonly float dashingTime = 0.2f;
+    private readonly float dashingCooldown = 1f;
 
     private bool isRunning;
     private bool isDashing;

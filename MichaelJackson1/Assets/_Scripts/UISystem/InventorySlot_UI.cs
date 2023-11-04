@@ -17,8 +17,9 @@ public class InventorySlot_UI : MonoBehaviour
     private void Awake()
     {
         ClearSlot();
+
         button = GetComponent<Button>();
-        button?.onClick.AddListener(OnUISlotClick);
+        button?.onClick.AddListener(OnUISlotClick); // Get the button and subscribe it to the method
 
         ParentDisplay = transform.parent.GetComponent<InventoryDisplay>();
     }
@@ -29,7 +30,7 @@ public class InventorySlot_UI : MonoBehaviour
         UpdateUISlot(slot);
     }
 
-    public void UpdateUISlot(InventorySlot slot)
+    public void UpdateUISlot(InventorySlot slot) // Update the UI slot and pass in the inventory slot to display on the UI
     {
         if (slot.ItemData != null)
         {
@@ -45,19 +46,19 @@ public class InventorySlot_UI : MonoBehaviour
         }
     }
 
-    public void UpdateUISlot()
+    public void UpdateUISlot() // Update the UI slot without input
     {
         if (assignedInventorySlot != null) UpdateUISlot(assignedInventorySlot);
     }
 
-    public void ClearSlot()
+    public void ClearSlot() // Empty the slot
     {
         assignedInventorySlot?.ClearSlot();
         itemSprite.sprite = null;
         itemSprite.color = Color.clear;
         itemCount.text = "";
     }
-    public void OnUISlotClick()
+    public void OnUISlotClick() // Track whether the slot is clicked
     {
         ParentDisplay?.SlotClicked(this);
     }

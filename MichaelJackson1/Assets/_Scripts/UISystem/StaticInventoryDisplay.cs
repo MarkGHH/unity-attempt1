@@ -12,12 +12,12 @@ public class StaticInventoryDisplay : InventoryDisplay
 
         if (inventoryHolder != null)
         {
-            inventorySystem = inventoryHolder.InventorySystem;
+            inventorySystem = inventoryHolder.InventorySystem; // If the inventoryHolder attached to the object is not null, then get it's inventory system and subscribe to the method
             inventorySystem.OnInventorySlotChanged += UpdateSlot;
         }
         else Debug.LogWarning($"No inventory assigned to {this.gameObject}");
 
-        AssignSlot(inventorySystem);
+        AssignSlot(inventorySystem); // Assign the inventorySystem
     }
     public override void AssignSlot(InventorySystem invToDisplay)
     {

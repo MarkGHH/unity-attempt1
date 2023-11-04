@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,16 +16,14 @@ public class MouseItemData : MonoBehaviour
         ItemSprite.color = Color.clear;
         ItemCount.text = "";
     }
-
-    public void UpdateMouseSlot(InventorySlot invSlot)
+    public void UpdateMouseSlot(InventorySlot invSlot) // Assign item to inventory slot and set the sprite, text and color
     {
         AssignedInventorySlot.AssignItem(invSlot);
         ItemSprite.sprite = invSlot.ItemData.Icon;
         ItemCount.text = invSlot.StackSize.ToString();
         ItemSprite.color = Color.white;
     }
-
-    private void Update()
+    private void Update() // If it has an item, follow the mouse position
     {
         if (AssignedInventorySlot.ItemData != null)
         {
@@ -38,16 +35,14 @@ public class MouseItemData : MonoBehaviour
             }
         }
     }
-
-    public void ClearSlot()
+    public void ClearSlot() // Set slot to default
     {
         AssignedInventorySlot.ClearSlot();
         ItemCount.text = "";
         ItemSprite.color = Color.clear;
         ItemSprite.sprite = null;
     }
-
-    public static bool IsPointerOverUIObject()
+    public static bool IsPointerOverUIObject() // Show whether the mouse position is currently over UI
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = Mouse.current.position.ReadValue();
