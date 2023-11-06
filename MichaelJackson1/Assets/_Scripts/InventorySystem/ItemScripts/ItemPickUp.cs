@@ -19,11 +19,11 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) // On trigger of the collider, check whether the collider had an inventory, if it does add the item to the inventory and destroy the gameobject this script is attached to
     {
-        var inventory = other.transform.GetComponent<InventoryHolder>();
+        var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
 
         if (!inventory) return;
 
-        if (inventory.InventorySystem.AddToInventory(ItemData, 1))
+        if (inventory.AddToInventory(ItemData, 1))
         {
             Destroy(this.gameObject);
         }

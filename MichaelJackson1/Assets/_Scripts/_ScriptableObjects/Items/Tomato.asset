@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   Icon: {fileID: -1658858302, guid: f2430cc7b1a1c81468d34a388921183e, type: 3}
-  maxStackSize: 5
+  maxStackSize: 1
   displayName: Tomato
   typeName: Very juicy

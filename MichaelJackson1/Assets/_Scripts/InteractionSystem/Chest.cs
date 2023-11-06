@@ -8,7 +8,7 @@ public class Chest : InventoryHolder, IInteract
     public string InteractionPrompt => prompt;
     public bool Interact(Interactor interactor)
     {
-        OnDynamicInventoryDisplayRequested?.Invoke(inventorySystem);
+        OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem);
         return true;
     }
 }
