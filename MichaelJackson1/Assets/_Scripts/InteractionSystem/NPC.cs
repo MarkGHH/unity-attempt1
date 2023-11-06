@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : MonoBehaviour, InteractInterface
+public class NPC : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
     public string InteractionPrompt => prompt;

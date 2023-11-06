@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Door : MonoBehaviour, InteractInterface
+public class Door : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
     [SerializeField] private string loadLevel;
