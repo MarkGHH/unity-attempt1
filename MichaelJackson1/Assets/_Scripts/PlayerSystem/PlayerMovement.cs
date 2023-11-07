@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
 
-        // Subcribe to all the events from the InputReader related to the player and set the function on catch
+        // Subcribe to all the events from the InputReader related to the player and start the function on receive
         input.MoveEvent += HandleMove;
         input.RunEvent += HandleRun;
         input.RunCancelledEvent += HandleRunCancelled;
