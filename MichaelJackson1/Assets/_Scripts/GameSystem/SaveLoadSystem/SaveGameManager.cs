@@ -23,6 +23,7 @@ public static class SaveGameManager
 
     public static void LoadGame()
     {
+
         string fullPath = Application.persistentDataPath + SaveDirectory + FileName;
         SaveData tempData = new SaveData();
 
