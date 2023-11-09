@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(UniqueID))]
 
 public class ItemPickUp : MonoBehaviour
 {
@@ -10,11 +12,34 @@ public class ItemPickUp : MonoBehaviour
     public InventoryItemData ItemData;
     private BoxCollider2D myCollider;
 
+    [SerializeField] private ItemPickUpSaveData itemSaveData;
+    private string id;
+
     private void Awake() // On awake gets the box collider of the item and sets a radius in which the collision is triggered
     {
+        id = GetComponent<UniqueID>().ID;
+        SaveLoad.OnLoadGame += LoadGame;
+        itemSaveData = new ItemPickUpSaveData(ItemData, transform.position);
+
         myCollider = GetComponent<BoxCollider2D>();
         myCollider.isTrigger = true;
         myCollider.edgeRadius = PickUpRadius;
+    }
+
+    private void Start()
+    {
+        SaveGameManager.data.activeItems.Add(id, itemSaveData);
+    }
+
+    private void LoadGame(SaveData data)
+    {
+        if (data.collectedItems.Contains(id)) Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (SaveGameManager.data.activeItems.ContainsKey(id)) SaveGameManager.data.activeItems.Remove(id);
+        SaveLoad.OnLoadGame -= LoadGame;
     }
 
     private void OnTriggerEnter2D(Collider2D other) // On trigger of the collider, check whether the collider had an inventory, if it does add the item to the inventory and destroy the gameobject this script is attached to
@@ -25,7 +50,21 @@ public class ItemPickUp : MonoBehaviour
 
         if (inventory.AddToInventory(ItemData, 1))
         {
+            SaveGameManager.data.collectedItems.Add(id);
             Destroy(this.gameObject);
         }
+    }
+}
+
+[System.Serializable]
+public struct ItemPickUpSaveData
+{
+    public InventoryItemData ItemData;
+    public Vector2 Position;
+
+    public ItemPickUpSaveData(InventoryItemData itemData, Vector2 position)
+    {
+        ItemData = itemData;
+        Position = position;
     }
 }

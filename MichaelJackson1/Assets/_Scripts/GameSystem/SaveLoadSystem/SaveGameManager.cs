@@ -1,41 +1,31 @@
 using UnityEngine;
-using System.IO;
 
-public static class SaveGameManager
+public class SaveGameManager : MonoBehaviour
 {
-    public static SaveData currentSaveData = new SaveData();
-    public const string SaveDirectory = "/SaveData/";
-    public const string FileName = "SaveGame.txt";
+    public static SaveData data;
 
-
-    public static bool SaveGame()
+    private void Awake()
     {
-        var dir = Application.persistentDataPath + SaveDirectory;
-        if (!Directory.Exists (dir)) Directory.CreateDirectory (dir);
-
-        string json = JsonUtility.ToJson(currentSaveData, true);
-        File.WriteAllText(dir + FileName, json);
-
-        GUIUtility.systemCopyBuffer = dir; // Copy string to clipboard
-
-        return true;
+        data = new SaveData();
+        SaveLoad.OnLoadGame += LoadData;
     }
 
-    public static void LoadGame()
+    public void DeleteData()
     {
+        SaveLoad.DeleteSavedData();
+    }
 
-        string fullPath = Application.persistentDataPath + SaveDirectory + FileName;
-        SaveData tempData = new SaveData();
-
-        if (File.Exists (fullPath))
-        {
-            string json = File.ReadAllText (fullPath);
-            tempData = JsonUtility.FromJson<SaveData>(json);
-        }
-        else
-        {
-            Debug.LogError("Save file does not exist.");
-        }
-        currentSaveData = tempData;
+    public static void SaveData()
+    {
+        var savedData = data;
+        SaveLoad.Save(savedData);
+    }
+    public static void LoadData(SaveData _data)
+    {
+        data = _data;
+    }
+    public static void TryLoadData()
+    {
+        SaveLoad.Load();
     }
 }

@@ -1,8 +1,14 @@
-[System.Serializable]
-
+using System.Collections.Generic;
 public class SaveData
 {
-    // Extend with different SaveData types (player, inventory, etc.)
-    public PlayerData PlayerData = new PlayerData();
-    
+    public List<string> collectedItems;
+    public SerializableDictionary<string, ItemPickUpSaveData> activeItems;
+    public SerializableDictionary<string, ChestSaveData> chestDictionary;
+
+    public SaveData()
+    {
+        collectedItems = new List<string>();
+        activeItems = new SerializableDictionary<string, ItemPickUpSaveData>();
+        chestDictionary = new SerializableDictionary<string, ChestSaveData>();
+    }
 }
