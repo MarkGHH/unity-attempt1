@@ -1,31 +1,30 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerSaveData : MonoBehaviour
 {
     private PlayerData MyData = new PlayerData();
-    private bool isSaving;
-    private bool isLoading;
+    public bool isSaving;
+    public bool isLoading;
 
-    private void Start()
-    {
-        // Subscribe to events, to bool to true
-
-    }
     void Update()
     {
-        MyData.PlayerPosition = transform.position; // Declare all variables from the player, as the script is attached to the player object
-        
-        //On Save (isSaving == true);
-        SaveGameManager.currentSaveData.PlayerData = MyData; // Saving
-        //On Save (isSaving == false);
+        if (Keyboard.current.rKey.wasPressedThisFrame || isSaving == true)
+        {
+            MyData.PlayerPosition = transform.position; // Declare all variables from the player to the data - this is required for each object that requires having it's data saved
+            SaveGameManager.currentSaveData.PlayerData = MyData;
+            SaveGameManager.SaveGame();
+            isSaving = false;
+        }
 
+        if (Keyboard.current.tKey.wasPressedThisFrame || isLoading == true)
+        {
 
-        //On Load (isLoading == true);
-        MyData = SaveGameManager.currentSaveData.PlayerData; // Loading -> won't work because save is in the same method
-        transform.position = MyData.PlayerPosition;
-        //On Load (isLoading == false);
+            MyData = SaveGameManager.currentSaveData.PlayerData;
+            transform.position = MyData.PlayerPosition; // Declare all variables from the data to the player - this is required for each object that requires having it's data saved
+            SaveGameManager.LoadGame();
+            isLoading = false;
+        }
     }
 }
 
@@ -35,3 +34,4 @@ public struct PlayerData
     public Vector3 PlayerPosition;
     // public int CurrentHealth;
 }
+
