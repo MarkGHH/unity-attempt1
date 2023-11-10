@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Strawberry
   m_EditorClassIdentifier: 
   ID: 2
-  Icon: {fileID: 1775669009216684005, guid: a2c110585eb710b408972fbc3b96136d, type: 3}
+  Icon: {fileID: -2104260565, guid: f2430cc7b1a1c81468d34a388921183e, type: 3}
   maxStackSize: 2
-  displayName: Strawberry
-  typeName: Fresh
+  displayName: Potato
+  typeName: Straight out of the soil

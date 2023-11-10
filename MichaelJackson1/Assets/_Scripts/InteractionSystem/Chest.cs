@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class Chest : InventoryHolder, IInteract
 {
-    [SerializeField] private string prompt;
-
-    public string InteractionPrompt => prompt;
     public bool Interact(Interactor interactor)
     {
         OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem);
         return true;
     }
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,7 +22,7 @@ public class Chest : InventoryHolder, IInteract
         SaveGameManager.data.chestDictionary.Add(GetComponent<UniqueID>().ID, chestSaveData);
     }
 
-    private void LoadInventory(SaveData data)
+    private void LoadInventory(SaveData data) // From the corresponding ID, get the data of the chest and assign it the values from loaded data
     {
         if (data.chestDictionary.TryGetValue(GetComponent<UniqueID>().ID, out ChestSaveData chestData))
         {
@@ -34,8 +32,10 @@ public class Chest : InventoryHolder, IInteract
     }
 }
 
+
+
 [System.Serializable]
-public struct ChestSaveData
+public struct ChestSaveData // Define all aspects that should be saved related to the chest
 {
     public InventorySystem invSystem;
     public Vector2 position;

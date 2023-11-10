@@ -18,6 +18,8 @@ public class InventorySlot_UI : MonoBehaviour
     {
         ClearSlot();
 
+        itemSprite.preserveAspect = true;
+
         button = GetComponent<Button>();
         button?.onClick.AddListener(OnUISlotClick); // Get the button and subscribe it to the method
 

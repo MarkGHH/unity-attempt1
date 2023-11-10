@@ -14,6 +14,7 @@ public class MouseItemData : MonoBehaviour
     private void Awake()
     {
         ItemSprite.color = Color.clear;
+        ItemSprite.preserveAspect = true;
         ItemCount.text = "";
     }
     public void UpdateMouseSlot(InventorySlot invSlot) // Assign item to inventory slot and set the sprite, text and color

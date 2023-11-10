@@ -5,12 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour, IInteract
 {
-    [SerializeField] private string prompt;
     [SerializeField] private string loadLevel;
-    public string InteractionPrompt => prompt;
     public bool Interact(Interactor interactor)
     {
-        Debug.Log("Opening door");
         SceneManager.LoadScene(loadLevel);
         return true;
     }

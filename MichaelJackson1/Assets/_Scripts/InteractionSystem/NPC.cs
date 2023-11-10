@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, IInteract
 {
-    [SerializeField] private string prompt;
-    public string InteractionPrompt => prompt;
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Talking to NPC");

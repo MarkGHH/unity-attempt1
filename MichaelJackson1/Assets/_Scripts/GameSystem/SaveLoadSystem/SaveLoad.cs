@@ -2,7 +2,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.IO;
 
-public static class SaveLoad
+/// <summary>
+/// This script handles the creation of the file. It takes input from other scripts based on the OnSaveGame and OnLoadGame events. It should not be necessary to adjust this script, all adjustments should be made in:
+/// - SaveData (What data is saved, and passed to this script)
+/// - Save script specific to an object (Obtaining and applying values from and to the specific object based on Save/Load game). Examples are "Chest" and "PlayerSave".
+/// </summary>
+public static class SaveLoad 
 {
     public static UnityAction OnSaveGame;
     public static UnityAction<SaveData> OnLoadGame;

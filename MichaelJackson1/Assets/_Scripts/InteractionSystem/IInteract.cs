@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface IInteract
 {
-    public string InteractionPrompt { get; }
     public bool Interact(Interactor interactor);
 
 }
