@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22860ab1a6f4b4a49ae1f256c3c5e03c, type: 3}
-  m_Name: Strawberry
+  m_Name: Potato
   m_EditorClassIdentifier: 
   ID: 2
   Icon: {fileID: -2104260565, guid: f2430cc7b1a1c81468d34a388921183e, type: 3}
   maxStackSize: 2
   displayName: Potato
   typeName: Straight out of the soil
+  ItemPrefab: {fileID: 3059249065305830713, guid: 0b5dec80b18213b4cbe96d9222222ab0, type: 3}

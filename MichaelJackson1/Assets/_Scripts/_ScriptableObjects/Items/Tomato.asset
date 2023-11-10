@@ -17,3 +17,4 @@ MonoBehaviour:
   maxStackSize: 1
   displayName: Tomato
   typeName: Very juicy
+  ItemPrefab: {fileID: 5563264398002619618, guid: eb0d494652b897940829d4279010c65d, type: 3}

@@ -17,7 +17,6 @@ public class ItemPickUp : MonoBehaviour
 
     private void Awake() // On awake gets the box collider of the item and sets a radius in which the collision is triggered
     {
-        id = GetComponent<UniqueID>().ID;
         SaveLoad.OnLoadGame += LoadGame;
         itemSaveData = new ItemPickUpSaveData(ItemData, transform.position);
 
@@ -28,6 +27,7 @@ public class ItemPickUp : MonoBehaviour
 
     private void Start()
     {
+        id = GetComponent<UniqueID>().ID;
         SaveGameManager.data.activeItems.Add(id, itemSaveData);
     }
 

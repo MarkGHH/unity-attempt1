@@ -5,7 +5,18 @@ using UnityEngine;
 public class StaticInventoryDisplay : InventoryDisplay
 {
     [SerializeField] private InventoryHolder inventoryHolder;
-    [SerializeField] private InventorySlot_UI[] slots;
+    [SerializeField] protected InventorySlot_UI[] slots;
+
+    protected virtual void OnEnable()
+    {
+        
+    }
+
+    protected virtual void OnDisable()
+    {
+
+    }
+
     protected override void Start()
     {
         base.Start();

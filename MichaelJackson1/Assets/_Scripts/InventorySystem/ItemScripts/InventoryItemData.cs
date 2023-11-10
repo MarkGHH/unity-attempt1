@@ -13,4 +13,5 @@ public class InventoryItemData : ScriptableObject // Decides what data can be at
     public int maxStackSize;
     public string displayName;
     public string typeName;
+    public GameObject ItemPrefab;
 }

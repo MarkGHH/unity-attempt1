@@ -11,6 +11,8 @@ public class MouseItemData : MonoBehaviour
     public TextMeshProUGUI ItemCount;
     public InventorySlot AssignedInventorySlot;
 
+    private float dropOffset = 5;
+
     private void Awake()
     {
         ItemSprite.color = Color.clear;
@@ -20,10 +22,16 @@ public class MouseItemData : MonoBehaviour
     public void UpdateMouseSlot(InventorySlot invSlot) // Assign item to inventory slot and set the sprite, text and color
     {
         AssignedInventorySlot.AssignItem(invSlot);
-        ItemSprite.sprite = invSlot.ItemData.Icon;
-        ItemCount.text = invSlot.StackSize.ToString();
+        UpdateMouseSlot();
+
+    }
+    public void UpdateMouseSlot() 
+    {
+        ItemSprite.sprite = AssignedInventorySlot.ItemData.Icon;
+        ItemCount.text = AssignedInventorySlot.StackSize.ToString();
         ItemSprite.color = Color.white;
     }
+
     private void Update() // If it has an item, follow the mouse position
     {
         if (AssignedInventorySlot.ItemData != null)
@@ -32,7 +40,20 @@ public class MouseItemData : MonoBehaviour
 
             if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
             {
-                ClearSlot();
+                if (AssignedInventorySlot.ItemData.ItemPrefab != null)
+                {
+                   Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, GameObject.FindWithTag("Player").transform.position + GameObject.FindWithTag("Player").transform.forward * dropOffset, Quaternion.identity);
+                }
+
+                //the code does not deal with item stacks being dropped, it sould drop the assignedinvslot.stacksize amount
+
+                if (AssignedInventorySlot.StackSize > 1)
+                {
+                    AssignedInventorySlot.AddToStack(-1);
+                    UpdateMouseSlot();
+                }
+                else ClearSlot();
+                
             }
         }
     }
