@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(UniqueID))]
+[RequireComponent(typeof(StaticUniqueID))]
 
 public class ItemPickUp : MonoBehaviour
 {
@@ -27,7 +24,7 @@ public class ItemPickUp : MonoBehaviour
 
     private void Start()
     {
-        id = GetComponent<UniqueID>().ID;
+        id = GetComponent<StaticUniqueID>().ID;
         SaveGameManager.data.activeItems.Add(id, itemSaveData);
     }
 
