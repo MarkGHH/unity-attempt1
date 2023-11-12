@@ -47,6 +47,20 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     public event Action PauseEvent;
     public event Action ResumeEvent;
 
+    public event Action Hotbar1Event;
+    public event Action Hotbar2Event;
+    public event Action Hotbar3Event;
+    public event Action Hotbar4Event;
+    public event Action Hotbar5Event;
+    public event Action Hotbar6Event;
+    public event Action Hotbar7Event;
+    public event Action Hotbar8Event;
+    public event Action Hotbar9Event;
+    public event Action Hotbar10Event;
+    public event Action<float> MouseWheelEvent;
+    public event Action UseItemEvent;
+
+
     // Sends an event to all listeners when On.. is triggered through the PlayerInputActions script
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -103,6 +117,100 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
         {
             ResumeEvent?.Invoke();
             SetGameplay();
+        }
+    }
+    public void OnHotbar1(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar1Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar2(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar2Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar3(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar3Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar4(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar4Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar5(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar5Event?.Invoke();
+        }
+    }
+    public void OnHotbar6(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar6Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar7(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar7Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar8(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar8Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar9(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar9Event?.Invoke();
+        }
+    }
+
+    public void OnHotbar10(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Hotbar10Event?.Invoke();
+        }
+    }
+
+    public void OnMouseWheel(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            MouseWheelEvent?.Invoke(context.ReadValue<float>());
+        }
+    }
+
+    public void OnUseItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            UseItemEvent?.Invoke();
         }
     }
 }

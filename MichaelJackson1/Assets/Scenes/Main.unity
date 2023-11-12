@@ -2102,7 +2102,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6811926, y: 0.45501, z: -10}
+  m_LocalPosition: {x: -2.681191, y: 0.45501, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3018,7 +3018,7 @@ Transform:
   m_GameObject: {fileID: 815813180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0011925697, y: -0.28500998, z: 0}
+  m_LocalPosition: {x: 0.0011909008, y: -0.28500998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10692,7 +10692,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592888666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d984cb2d35aed849b1d865ac4d739ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bf793db21f52a54e91661668de5be4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseInventoryItem: {fileID: 1793566937}
@@ -10708,6 +10708,7 @@ MonoBehaviour:
   - {fileID: 768911369}
   - {fileID: 930195167}
   - {fileID: 1794346943}
+  input: {fileID: 11400000, guid: 6b5dde591a290d64aababefbaea11225, type: 2}
 --- !u!1 &1596041056
 GameObject:
   m_ObjectHideFlags: 0

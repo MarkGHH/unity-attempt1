@@ -8,12 +8,12 @@ public class StaticInventoryDisplay : InventoryDisplay
     [SerializeField] private InventoryHolder inventoryHolder;
     [SerializeField] protected InventorySlot_UI[] slots;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         PlayerInventoryHolder.OnPlayerInventoryChanged += RefreshStaticDisplay;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         PlayerInventoryHolder.OnPlayerInventoryChanged -= RefreshStaticDisplay;
     }
@@ -32,8 +32,6 @@ public class StaticInventoryDisplay : InventoryDisplay
 
     protected override void Start()
     {
-        base.Start();
-
         RefreshStaticDisplay();
     }
     public override void AssignSlot(InventorySystem invToDisplay, int offset)

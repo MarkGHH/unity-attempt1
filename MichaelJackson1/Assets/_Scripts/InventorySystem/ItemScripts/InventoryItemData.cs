@@ -14,4 +14,10 @@ public class InventoryItemData : ScriptableObject // Decides what data can be at
     public string displayName;
     public string typeName;
     public GameObject ItemPrefab;
+
+    public void UseItem()
+    {
+        Debug.Log("Using Item");
+    }
 }
+
