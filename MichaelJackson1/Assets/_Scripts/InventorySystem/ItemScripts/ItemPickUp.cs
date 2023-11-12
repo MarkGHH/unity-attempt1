@@ -47,6 +47,7 @@ public class ItemPickUp : MonoBehaviour
 
         if (inventory.AddToInventory(ItemData, 1))
         {
+            AudioManager.Instance.PlaySFX("PickItem");
             SaveGameManager.data.collectedItems.Add(id);
             Destroy(this.gameObject);
         }

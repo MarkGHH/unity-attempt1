@@ -17,7 +17,7 @@ public class InventoryItemData : ScriptableObject // Decides what data can be at
 
     public void UseItem()
     {
-        Debug.Log("Using Item");
+        
     }
 }
 

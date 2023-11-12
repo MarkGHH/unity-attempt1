@@ -59,9 +59,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleDash()
     {
-        isDashing = true;
+        if (moveDirection != Vector2.zero & !isDashing)
+        {
+            isDashing = true;
+            AudioManager.Instance.PlaySFX("Dash");
+        }
     }
-
     private void Move() // General player movement
     {
         if (moveDirection != Vector2.zero) // If the Vector2 is not equal to (0, 0) then 

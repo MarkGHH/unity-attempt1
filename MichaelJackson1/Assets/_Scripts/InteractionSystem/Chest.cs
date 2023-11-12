@@ -1,12 +1,26 @@
 using UnityEngine;
+using System.Collections;
 [RequireComponent(typeof(UniqueID))]
 
 public class Chest : InventoryHolder, IInteract
 {
+    private bool audioPlaying;
     public bool Interact(Interactor interactor)
     {
         OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem, 0);
+        StartCoroutine(ChestAudio());
         return true;
+    }
+
+    private IEnumerator ChestAudio()
+    {
+        if (!audioPlaying)
+        {
+            audioPlaying = true;
+            AudioManager.Instance.PlaySFX("Chest");
+            yield return new WaitForSeconds(0.3f);
+            audioPlaying = false;
+        }
     }
 
     protected override void Awake()
