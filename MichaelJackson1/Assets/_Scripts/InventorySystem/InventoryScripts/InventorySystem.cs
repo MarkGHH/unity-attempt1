@@ -39,7 +39,7 @@ public class InventorySystem
         {
             if (freeSlot.EnoughRoomLeftInStack(amountToAdd))
             {
-                freeSlot.UpdateInventorySlot(itemToAdd, amountToAdd);
+                freeSlot.UpdateInventorySlot(itemToAdd, amountToAdd); // Adds the item to the free slot
                 OnInventorySlotChanged?.Invoke(freeSlot);
                 return true;
             }

@@ -9,8 +9,8 @@ public class ItemPickUp : MonoBehaviour
     public InventoryItemData ItemData;
     private BoxCollider2D myCollider;
 
-    [SerializeField] private ItemPickUpSaveData itemSaveData;
-    private string id;
+    [SerializeField] public ItemPickUpSaveData itemSaveData;
+    private string staticID;
 
     private void Awake() // On awake gets the box collider of the item and sets a radius in which the collision is triggered
     {
@@ -24,18 +24,18 @@ public class ItemPickUp : MonoBehaviour
 
     private void Start()
     {
-        id = GetComponent<StaticUniqueID>().ID;
-        SaveGameManager.data.activeItems.Add(id, itemSaveData);
+        staticID = GetComponent<StaticUniqueID>().ID;
+        SaveGameManager.data.activeItems.Add(staticID, itemSaveData);
     }
 
     private void LoadGame(SaveData data)
     {
-        if (data.collectedItems.Contains(id)) Destroy(this.gameObject);
+        if (data.collectedItems.Contains(staticID)) Destroy(this.gameObject);
     }
 
     private void OnDestroy()
     {
-        if (SaveGameManager.data.activeItems.ContainsKey(id)) SaveGameManager.data.activeItems.Remove(id);
+        if (SaveGameManager.data.activeItems.ContainsKey(staticID)) SaveGameManager.data.activeItems.Remove(staticID);
         SaveLoad.OnLoadGame -= LoadGame;
     }
 
@@ -48,8 +48,9 @@ public class ItemPickUp : MonoBehaviour
         if (inventory.AddToInventory(ItemData, 1))
         {
             AudioManager.Instance.PlaySFX("PickItem");
-            SaveGameManager.data.collectedItems.Add(id);
+            SaveGameManager.data.collectedItems.Add(staticID);
             Destroy(this.gameObject);
+
         }
     }
 }

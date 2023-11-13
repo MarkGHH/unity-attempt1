@@ -26,10 +26,10 @@ public class PlayerInventoryHolder : InventoryHolder
 
     private void Update()
     {
-        if (Keyboard.current.bKey.wasPressedThisFrame) OnPlayerInventoryDisplayRequested?.Invoke(primaryInventorySystem, offset);
+        if (Keyboard.current.bKey.wasPressedThisFrame) OnPlayerInventoryDisplayRequested?.Invoke(primaryInventorySystem, offset); // Opens the player backpack
     }
 
-    public bool AddToInventory(InventoryItemData data, int amount)
+    public bool AddToInventory(InventoryItemData data, int amount) // Attempt to add the item to the primary inventory system, which is attached to the player of type InventorySystem
     {
         if (primaryInventorySystem.AddToInventory(data, amount)) return true;
 

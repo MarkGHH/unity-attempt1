@@ -25,7 +25,7 @@ public class StaticUniqueID : MonoBehaviour
         if (idDatabase.ContainsKey(_id)) idDatabase.Remove(_id);
     }
 
-    private void Generate()
+    public void Generate()
     {
         _id = Guid.NewGuid().ToString();
         idDatabase.Add(_id, this.gameObject);

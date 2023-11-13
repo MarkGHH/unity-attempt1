@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -5,7 +6,6 @@ public class InventorySlot
 {
     [SerializeField] private InventoryItemData itemData; // Reference to the item data
     [SerializeField] private int stackSize; // Current stack size - how many of the item do we have?
-
     public InventoryItemData ItemData => itemData;
     public int StackSize => stackSize;
     public InventorySlot(InventoryItemData source, int amount) // Constructor to make an occupied inventory slot
@@ -35,7 +35,8 @@ public class InventorySlot
     }
     public void UpdateInventorySlot(InventoryItemData data, int amount) // Updates slot directly
     {
-        itemData = data; stackSize = amount;
+        itemData = data; 
+        stackSize = amount; 
     }
     public bool EnoughRoomLeftInStack(int amountToAdd, out int amountRemaining) // Checks the remaining amount including a return of the remaining amount
     {
