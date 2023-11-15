@@ -6,21 +6,39 @@ using System;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private InputReader input;
-    [SerializeField] private GameObject pauseMenu; // Should contain the UI
+    [SerializeField] private GameObject UIMenu; // Should contain the UI
+    [SerializeField] private GameObject buildingMenu; // Should contain the UI
 
-    private void Start()
+    private void Awake()
     {
-        pauseMenu.SetActive(false);
-        input.PauseEvent += HandlePause;
-        input.ResumeEvent += HandleResume;
+        UIMenu.SetActive(false);
+        input.UIModeEvent += HandleEnterUI;
+        input.ExitUIEvent += HandleExitUI;
+        input.ExitBuildingEvent += HandleExitBuilding;
+        input.BuildingModeEvent += HandleEnterBuilding;
     }
-    private void HandlePause()
+    private void OnDisable()
     {
-        pauseMenu.SetActive(true);
+        input.UIModeEvent -= HandleEnterUI;
+        input.ExitUIEvent -= HandleExitUI;
+        input.ExitBuildingEvent -= HandleExitBuilding;
+        input.BuildingModeEvent -= HandleEnterBuilding;
     }
-    private void HandleResume()
+    private void HandleEnterBuilding()
     {
-        pauseMenu.SetActive(false);
+        buildingMenu.SetActive(true);
+    }
+    private void HandleExitBuilding()
+    {
+        buildingMenu.SetActive(false);
+    }
+    private void HandleEnterUI()
+    {
+        UIMenu.SetActive(true);
+    }
+    private void HandleExitUI()
+    {
+        UIMenu.SetActive(false);
     }
 
 }

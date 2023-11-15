@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
-    [SerializeField] private InputReader input;
+    [SerializeField] public InputReader input;
 
 
 

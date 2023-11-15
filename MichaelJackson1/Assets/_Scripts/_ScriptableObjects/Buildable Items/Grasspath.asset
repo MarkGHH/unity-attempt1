@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894e2248573e7034faa1a3ad42d50ec4, type: 3}
+  m_Name: Grasspath
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: grasspath
+  <Tile>k__BackingField: {fileID: 11400000, guid: d9007f52a32d8604b8b0bd4a3c10275f, type: 2}
+  <TileOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  <PreviewSprite>k__BackingField: {fileID: -1986029704, guid: 9d588ccce97bf8f469b0b95938d2535d, type: 3}

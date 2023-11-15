@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
 [RequireComponent(typeof(UniqueID))]
 
 public class Chest : InventoryHolder, IInteract
@@ -7,7 +9,8 @@ public class Chest : InventoryHolder, IInteract
     private bool audioPlaying;
     public bool Interact(Interactor interactor)
     {
-        OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem, 0);
+        Debug.Log("interacting");
+        OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem, 0);      
         StartCoroutine(ChestAudio());
         return true;
     }

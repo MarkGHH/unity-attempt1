@@ -3,9 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "InputReader")]
-public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions, PlayerInputActions.IUIActions
+public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions, PlayerInputActions.IUIActions, PlayerInputActions.IBuildingActions, PlayerInputActions.IInteractingActions
 {
     private PlayerInputActions playerInputActions;
+
 
     private void OnEnable() // If there is no action mapping, get the action mapping and switch to the gameplay mapping
     {
@@ -15,6 +16,8 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
 
             playerInputActions.Gameplay.SetCallbacks(this);
             playerInputActions.UI.SetCallbacks(this);
+            playerInputActions.Building.SetCallbacks(this);
+            playerInputActions.Interacting.SetCallbacks(this);
 
             SetGameplay();
         }
@@ -28,11 +31,24 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
 
     public void SetUI() // Switches to the UI mapping
     {
-        playerInputActions.Gameplay.Disable();
         playerInputActions.UI.Enable();
+        playerInputActions.Gameplay.Disable();
+    }
+
+    public void SetInteracting()
+    {
+        playerInputActions.Interacting.Enable();
+        playerInputActions.Gameplay.Disable();
+    }
+
+    public void SetBuilding() 
+    {
+        playerInputActions.Building.Enable();
+        playerInputActions.Gameplay.Disable();
     }
 
     // All necessary events defined below to handle input actions
+    #region Gameplay
     public event Action<Vector2> MoveEvent;
 
     public event Action RunEvent;
@@ -44,8 +60,9 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     public event Action InteractEvent;
     public event Action InteractCancelledEvent;
 
-    public event Action PauseEvent;
-    public event Action ResumeEvent;
+    public event Action UIModeEvent;
+
+    public event Action BackpackEvent;
 
     public event Action Hotbar1Event;
     public event Action Hotbar2Event;
@@ -57,8 +74,28 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     public event Action Hotbar8Event;
     public event Action Hotbar9Event;
     public event Action Hotbar10Event;
+
     public event Action<float> MouseWheelEvent;
-    public event Action UseItemEvent;
+    public event Action<Vector2> MousePositionEvent;
+    public event Action<bool> PerformActionEvent;
+    public event Action<bool> CancelActionEvent;
+    public event Action BuildingModeEvent;
+    #endregion
+
+    #region UI
+    public event Action ExitUIEvent;
+    #endregion
+
+    #region Interacting
+    public event Action ContinueInteractionEvent;
+    public event Action ExitInteractionEvent;
+    #endregion
+
+    #region Building
+    public event Action NextItemEvent;
+    public event Action PreviousItemEvent;
+    public event Action ExitBuildingEvent;
+    #endregion
 
 
     // Sends an event to all listeners when On.. is triggered through the PlayerInputActions script
@@ -102,20 +139,20 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
         }
     }
 
-    public void OnPause(InputAction.CallbackContext context) // Switch to UI map!
+    public void OnUIMode(InputAction.CallbackContext context) // Switch to UI map!
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            PauseEvent?.Invoke();
+            UIModeEvent?.Invoke();
             SetUI();
         }
     }
 
-    public void OnResume(InputAction.CallbackContext context) // Switch to Gameplay map!
+    public void OnExitUI(InputAction.CallbackContext context) // Switch to Gameplay map!
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            ResumeEvent?.Invoke();
+            ExitUIEvent?.Invoke();
             SetGameplay();
         }
     }
@@ -206,11 +243,89 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
         }
     }
 
-    public void OnUseItem(InputAction.CallbackContext context)
+    public void OnPerformAction(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            UseItemEvent?.Invoke();
+            PerformActionEvent?.Invoke(true);
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            PerformActionEvent?.Invoke(false);
+        }
+    }
+    public void OnCancelAction(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CancelActionEvent?.Invoke(true);
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            CancelActionEvent?.Invoke(false);
+        }
+    }
+    public void OnMousePosition(InputAction.CallbackContext context)
+    {
+        MousePositionEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnContinueinteraction(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ContinueInteractionEvent?.Invoke();
+        }
+    }
+
+    public void OnBuildingMode(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            BuildingModeEvent?.Invoke();
+            SetBuilding();
+        }
+    }
+
+    public void OnNextItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            NextItemEvent?.Invoke();
+        }
+    }
+
+    public void OnPreviousItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            PreviousItemEvent?.Invoke();
+        }
+    }
+
+    public void OnExitBuilding(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ExitBuildingEvent?.Invoke();
+            SetGameplay();
+        }
+    }
+
+    public void OnExitInteraction(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ExitInteractionEvent?.Invoke();
+            SetGameplay();
+        }
+    }
+
+    public void OnBackpack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            BackpackEvent?.Invoke();
         }
     }
 }

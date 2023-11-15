@@ -21,7 +21,7 @@ public class HotbarDisplay : StaticInventoryDisplay
         input.Hotbar8Event += Hotbar8;
         input.Hotbar9Event += Hotbar9;
         input.Hotbar10Event += Hotbar10;
-        input.UseItemEvent += UseItem;
+        input.PerformActionEvent += UseItem;
         input.MouseWheelEvent += MouseWheel;
     }
     protected override void OnDisable()
@@ -37,7 +37,7 @@ public class HotbarDisplay : StaticInventoryDisplay
         input.Hotbar8Event -= Hotbar8;
         input.Hotbar9Event -= Hotbar9;
         input.Hotbar10Event -= Hotbar10;
-        input.UseItemEvent -= UseItem;
+        input.PerformActionEvent -= UseItem;
         input.MouseWheelEvent -= MouseWheel;
     }
 
@@ -120,7 +120,7 @@ public class HotbarDisplay : StaticInventoryDisplay
     /// Use item should only work in case we are in the Gameplay action map, opening a backpack should enable a different input map where moving is still allowed but items cant be used, opening a chest should open a different input map where moving isnt allowed and items cant be used
     /// </summary>
 
-    private void UseItem() // Call UseItem in case the slot is filled, from the scriptable object item data
+    private void UseItem(bool isPressed) // Call UseItem in case the slot is filled, from the scriptable object item data
     {
         if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) slots[_currentIndex].AssignedInventorySlot.ItemData.UseItem();
     }

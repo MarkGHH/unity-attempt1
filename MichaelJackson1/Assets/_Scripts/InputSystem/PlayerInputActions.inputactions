@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "UI Mode",
                     "type": "Button",
                     "id": "2ed143bb-00fe-4cfa-af94-8d8443630ce1",
                     "expectedControlType": "Button",
@@ -150,9 +150,45 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Use Item",
+                    "name": "Perform Action",
                     "type": "Button",
                     "id": "a1c5f744-8e5f-46f8-92e8-9ccba3332827",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel Action",
+                    "type": "Button",
+                    "id": "fe3f8823-d270-46c9-96f9-a75142ee6cdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse Position",
+                    "type": "Value",
+                    "id": "01cd7e20-1392-431d-806b-3ff68c9fe107",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Building Mode",
+                    "type": "Button",
+                    "id": "80f47ce4-7ffa-468c-863b-9421feaa7ac7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Backpack",
+                    "type": "Button",
+                    "id": "0886fc89-596f-4305-aa56-7cd7d2271dc9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -343,7 +379,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pause",
+                    "action": "UI Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -354,7 +390,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Pause",
+                    "action": "UI Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -486,7 +522,51 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Use Item",
+                    "action": "Perform Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4fe65a07-b4ac-4fa3-b0e6-a62f9e775dec",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Cancel Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd22d82c-3627-4683-997c-6ca843f64db2",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Mouse Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18ac7f8d-3c1e-4848-8ad1-4164b110618f",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Building Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67043517-a372-4c82-a1f7-464190e510c8",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Backpack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -497,7 +577,7 @@
             "id": "1b15b81b-2ef7-4a0d-8110-c88e3d92ae7f",
             "actions": [
                 {
-                    "name": "Resume",
+                    "name": "Exit UI",
                     "type": "Button",
                     "id": "019b9565-ab04-4b82-adb2-6477f8a7d0b6",
                     "expectedControlType": "Button",
@@ -514,7 +594,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Resume",
+                    "action": "Exit UI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -525,7 +605,245 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Resume",
+                    "action": "Exit UI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interacting",
+            "id": "53618fa2-4220-44fe-820a-302fbd58773f",
+            "actions": [
+                {
+                    "name": "Continue interaction",
+                    "type": "Button",
+                    "id": "5cb4c5de-c2ec-4f12-8eb1-9c1cb1fc6309",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel Action",
+                    "type": "Button",
+                    "id": "83824fbf-3ed5-4578-8543-70df57d868b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Perform Action",
+                    "type": "Button",
+                    "id": "6ab7d204-87a4-4179-a6b8-2eb5d8f5d911",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit Interaction",
+                    "type": "Button",
+                    "id": "a3f47356-6a28-4fb9-bb6e-5c423be1b249",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "72604430-f391-4c74-a881-819f383fe836",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Continue interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3aa164b-28f2-47e2-9465-ee7a83f78fa8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Continue interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b6e7602-b1b6-4340-a932-4296384c0160",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Exit Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "277d2ea1-ab54-4216-ac30-60715e044547",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Exit Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "013f3d49-4d7f-4f5f-8c87-dba799fefc0e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Perform Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8e4f075-04e2-4510-8647-f35602ca654b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Cancel Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Building",
+            "id": "0afb8e48-f910-4d6b-b2c4-979a0f9b6412",
+            "actions": [
+                {
+                    "name": "Mouse Position",
+                    "type": "Value",
+                    "id": "4eaae6ae-1eb4-4d1a-b92a-226b5f9567e2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Cancel Action",
+                    "type": "Button",
+                    "id": "52e2bc94-20d5-4ece-8e7d-586adbd9af50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Perform Action",
+                    "type": "Button",
+                    "id": "5a4f3d89-78c0-4eec-a4a2-410c895bec17",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Next Item",
+                    "type": "Button",
+                    "id": "62e6bb6c-fb6c-4ffc-a830-4d155c8d29f4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Previous Item",
+                    "type": "Button",
+                    "id": "671fd099-f93c-4904-bc72-7ab007dcb0de",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit Building",
+                    "type": "Button",
+                    "id": "6358e8e2-9b6b-40f1-8235-8b522a3a6fa7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "10c1c31d-1576-4b4a-a76c-abcb7abe5217",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Mouse Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18107330-e2ff-43fe-a493-de61c5f057e4",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Cancel Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b9ba972-506d-4f21-a4b9-f32e836c764f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Perform Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "829ee111-5a49-4165-9501-528917d537a9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Next Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a81c0e27-c6ad-41c0-8476-258d64e10b46",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Previous Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e06cf4aa-9319-4245-acf7-19366eb7acf7",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Exit Building",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

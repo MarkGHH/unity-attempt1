@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     // To call this AudioManager and play a certain sound, make an instance of the audiomanager and pass the title of the song
     // AudioManager.Instance.PlayMusic/PlaySFX("song-title");
     // Based on tutorial: https://www.youtube.com/watch?v=rdX7nhH6jdM
+
+
     public static AudioManager Instance;
 
     public Sound[] musicFiles, sfxFiles;
@@ -18,6 +20,8 @@ public class AudioManager : MonoBehaviour
 
     private bool isPlayingSFX;
     private bool isPlayingMusic;
+
+
 
     private void Awake()
     {
@@ -31,6 +35,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 
     private void Start()
     {
