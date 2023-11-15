@@ -18,12 +18,18 @@ namespace BuildingSystem
 
         private void OnEnable()
         {
-            
+            input.NextItemEvent += NextItem;
         }
 
         private void OnDisable()
         {
-            
+            input.NextItemEvent -= NextItem;
         }
+        private void NextItem()
+        {
+            activeBuildableIndex = (activeBuildableIndex + 1) % buildables.Count;
+            buildingPlacer.SetActiveBuildable(buildables[activeBuildableIndex]);
+        }
+
     }
 }

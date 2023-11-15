@@ -19,14 +19,14 @@ namespace BuildingSystem
         private void Awake()
         {
             input = gameObject.GetComponent<PlayerMovement>().input;
-            input.MousePositionEvent += MousePosition;
+            input.MousePositionBuildingEvent += MousePosition;
             input.PerformActionEvent += PerformAction;
             input.CancelActionEvent += CancelAction;
         }
 
         private void OnDisable()
         {
-            input.MousePositionEvent -= MousePosition;
+            input.MousePositionBuildingEvent -= MousePosition;
             input.PerformActionEvent -= PerformAction;
             input.CancelActionEvent -= CancelAction;
         }
@@ -67,6 +67,11 @@ namespace BuildingSystem
                 }
             }
 
+        }
+
+        public void SetActiveBuildable(BuildableItem item)
+        {
+            ActiveBuildable = item;
         }
 
     }

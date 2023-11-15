@@ -748,7 +748,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""0afb8e48-f910-4d6b-b2c4-979a0f9b6412"",
             ""actions"": [
                 {
-                    ""name"": ""Mouse Position"",
+                    ""name"": ""Mouse Position Building"",
                     ""type"": ""Value"",
                     ""id"": ""4eaae6ae-1eb4-4d1a-b92a-226b5f9567e2"",
                     ""expectedControlType"": ""Vector2"",
@@ -810,7 +810,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Mouse Position"",
+                    ""action"": ""Mouse Position Building"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -969,7 +969,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Interacting_ExitInteraction = m_Interacting.FindAction("Exit Interaction", throwIfNotFound: true);
         // Building
         m_Building = asset.FindActionMap("Building", throwIfNotFound: true);
-        m_Building_MousePosition = m_Building.FindAction("Mouse Position", throwIfNotFound: true);
+        m_Building_MousePositionBuilding = m_Building.FindAction("Mouse Position Building", throwIfNotFound: true);
         m_Building_CancelAction = m_Building.FindAction("Cancel Action", throwIfNotFound: true);
         m_Building_PerformAction = m_Building.FindAction("Perform Action", throwIfNotFound: true);
         m_Building_NextItem = m_Building.FindAction("Next Item", throwIfNotFound: true);
@@ -1358,7 +1358,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Building
     private readonly InputActionMap m_Building;
     private List<IBuildingActions> m_BuildingActionsCallbackInterfaces = new List<IBuildingActions>();
-    private readonly InputAction m_Building_MousePosition;
+    private readonly InputAction m_Building_MousePositionBuilding;
     private readonly InputAction m_Building_CancelAction;
     private readonly InputAction m_Building_PerformAction;
     private readonly InputAction m_Building_NextItem;
@@ -1368,7 +1368,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         private @PlayerInputActions m_Wrapper;
         public BuildingActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MousePosition => m_Wrapper.m_Building_MousePosition;
+        public InputAction @MousePositionBuilding => m_Wrapper.m_Building_MousePositionBuilding;
         public InputAction @CancelAction => m_Wrapper.m_Building_CancelAction;
         public InputAction @PerformAction => m_Wrapper.m_Building_PerformAction;
         public InputAction @NextItem => m_Wrapper.m_Building_NextItem;
@@ -1383,9 +1383,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_BuildingActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_BuildingActionsCallbackInterfaces.Add(instance);
-            @MousePosition.started += instance.OnMousePosition;
-            @MousePosition.performed += instance.OnMousePosition;
-            @MousePosition.canceled += instance.OnMousePosition;
+            @MousePositionBuilding.started += instance.OnMousePositionBuilding;
+            @MousePositionBuilding.performed += instance.OnMousePositionBuilding;
+            @MousePositionBuilding.canceled += instance.OnMousePositionBuilding;
             @CancelAction.started += instance.OnCancelAction;
             @CancelAction.performed += instance.OnCancelAction;
             @CancelAction.canceled += instance.OnCancelAction;
@@ -1405,9 +1405,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IBuildingActions instance)
         {
-            @MousePosition.started -= instance.OnMousePosition;
-            @MousePosition.performed -= instance.OnMousePosition;
-            @MousePosition.canceled -= instance.OnMousePosition;
+            @MousePositionBuilding.started -= instance.OnMousePositionBuilding;
+            @MousePositionBuilding.performed -= instance.OnMousePositionBuilding;
+            @MousePositionBuilding.canceled -= instance.OnMousePositionBuilding;
             @CancelAction.started -= instance.OnCancelAction;
             @CancelAction.performed -= instance.OnCancelAction;
             @CancelAction.canceled -= instance.OnCancelAction;
@@ -1522,7 +1522,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public interface IBuildingActions
     {
-        void OnMousePosition(InputAction.CallbackContext context);
+        void OnMousePositionBuilding(InputAction.CallbackContext context);
         void OnCancelAction(InputAction.CallbackContext context);
         void OnPerformAction(InputAction.CallbackContext context);
         void OnNextItem(InputAction.CallbackContext context);

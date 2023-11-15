@@ -726,7 +726,7 @@
             "id": "0afb8e48-f910-4d6b-b2c4-979a0f9b6412",
             "actions": [
                 {
-                    "name": "Mouse Position",
+                    "name": "Mouse Position Building",
                     "type": "Value",
                     "id": "4eaae6ae-1eb4-4d1a-b92a-226b5f9567e2",
                     "expectedControlType": "Vector2",
@@ -788,7 +788,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Mouse Position",
+                    "action": "Mouse Position Building",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

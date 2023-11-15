@@ -95,6 +95,7 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     public event Action NextItemEvent;
     public event Action PreviousItemEvent;
     public event Action ExitBuildingEvent;
+    public event Action<Vector2> MousePositionBuildingEvent;
     #endregion
 
 
@@ -268,6 +269,11 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     public void OnMousePosition(InputAction.CallbackContext context)
     {
         MousePositionEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnMousePositionBuilding(InputAction.CallbackContext context)
+    {
+        MousePositionBuildingEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnContinueinteraction(InputAction.CallbackContext context)
