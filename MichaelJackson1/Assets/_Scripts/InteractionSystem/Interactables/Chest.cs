@@ -7,10 +7,12 @@ using System;
 public class Chest : InventoryHolder, IInteract
 {
     private bool audioPlaying;
+    private bool isOpen;
     public bool Interact(Interactor interactor)
     {
-        Debug.Log("interacting");
-        OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem, 0);      
+        if (!isOpen) isOpen = true;
+        else if (isOpen) isOpen = false;
+        OnDynamicInventoryDisplayRequested?.Invoke(InventorySystem, 0, isOpen);      
         StartCoroutine(ChestAudio());
         return true;
     }

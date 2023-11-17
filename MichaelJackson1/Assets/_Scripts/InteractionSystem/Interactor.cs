@@ -10,27 +10,19 @@ public class Interactor : MonoBehaviour
     public bool IsInteracting {  get; private set; }
     [SerializeField] private InputReader input;
     private Vector2 moveDirection;
+    private bool Interacted;
 
     private void Awake()
     {
         input.MoveEvent += HandleMove;
-        input.InteractEvent += HandleInteract;
+        input.InteractEvent += Raycast;
         input.InteractCancelledEvent += HandleInteractCancelled;
     }
-    private void Update()
+    private void Raycast()
     {
         MoveDirection();
         PerformRaycast();
-        DrawRaycast();
-
-        if (raycastHit.collider != null)
-        {
-            var interactable = raycastHit.collider.GetComponent<IInteract>();
-            if (interactable != null && IsInteracting == true)
-            {
-                interactable.Interact(this);
-            }
-        }
+        InteractWithInteractable();
     }
     private void HandleInteract()
     {
@@ -67,8 +59,23 @@ public class Interactor : MonoBehaviour
     {
         raycastHit = Physics2D.Raycast(rayObject.transform.position, raycastDirection, rayDistance, contactFilter);
     }
-    private void DrawRaycast()
+    private void Update()
     {
+        MoveDirection();
+        Physics2D.Raycast(rayObject.transform.position, raycastDirection, rayDistance, contactFilter);
         Debug.DrawRay(rayObject.transform.position, raycastDirection * rayDistance, Color.red);
+    }
+    private void InteractWithInteractable()
+    {
+        if (raycastHit.collider != null)
+        {
+            var interactable = raycastHit.collider.GetComponent<IInteract>();
+            if (interactable != null && Interacted == false)
+            {
+                Interacted = true;
+                interactable.Interact(this);
+                Interacted = false;
+            }
+        }
     }
 }
