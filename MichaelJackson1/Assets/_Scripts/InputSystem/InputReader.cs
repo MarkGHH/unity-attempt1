@@ -27,6 +27,8 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     {
         playerInputActions.Gameplay.Enable();
         playerInputActions.UI.Disable();
+        playerInputActions.Building.Disable();
+        playerInputActions.Interacting.Disable();
     }
 
     public void SetUI() // Switches to the UI mapping
@@ -132,12 +134,14 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     {
         if (context.phase == InputActionPhase.Performed)
         {
+            //SetInteracting();
             InteractEvent?.Invoke();
         }
         if (context.phase == InputActionPhase.Canceled)
         {
             InteractCancelledEvent?.Invoke();
         }
+        
     }
 
     public void OnUIMode(InputAction.CallbackContext context) // Switch to UI map!
@@ -280,7 +284,7 @@ public class InputReader : ScriptableObject, PlayerInputActions.IGameplayActions
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            ContinueInteractionEvent?.Invoke();
+            InteractEvent?.Invoke();
         }
     }
 

@@ -21,6 +21,7 @@ public class Chest : InventoryHolder, IInteract
     {
         if (!audioPlaying)
         {
+            Debug.Log(gameObject.name);
             audioPlaying = true;
             AudioManager.Instance.PlaySFX("Chest");
             yield return new WaitForSeconds(0.3f);

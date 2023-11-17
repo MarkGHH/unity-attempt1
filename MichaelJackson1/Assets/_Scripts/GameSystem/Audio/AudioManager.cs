@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -17,11 +15,6 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] musicFiles, sfxFiles;
     public AudioSource musicSource, sfxSource;
-
-    private bool isPlayingSFX;
-    private bool isPlayingMusic;
-
-
 
     private void Awake()
     {
@@ -42,8 +35,10 @@ public class AudioManager : MonoBehaviour
     {
         PlayMusic("MainTheme");
     }
+
     public void PlayMusic(string name)
     {
+        //if (name == "MainTheme") name = name; Incoming string is MainTheme, but to manage these centrally they can be declared here and adjusted to whatever necessary as a way to translate to the correct name
         Sound s = Array.Find(musicFiles, x => x.name == name);
 
         if (s == null)
@@ -58,6 +53,7 @@ public class AudioManager : MonoBehaviour
 
         }
     }
+
     public void PlaySFX(string name)
     {
         Sound s = Array.Find(sfxFiles, x => x.name == name);

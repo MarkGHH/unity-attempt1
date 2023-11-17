@@ -1,22 +1,33 @@
+using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactor : MonoBehaviour
 {
     [SerializeField] private float rayDistance = 1f;
+    [SerializeField] private InputReader input;
+    public bool IsInteracting { get; private set; }
+
     public GameObject rayObject;
+
     public LayerMask contactFilter;
     public RaycastHit2D raycastHit;
     private Vector2 raycastDirection;
-    public bool IsInteracting {  get; private set; }
-    [SerializeField] private InputReader input;
     private Vector2 moveDirection;
+
     private bool Interacted;
 
     private void Awake()
     {
         input.MoveEvent += HandleMove;
         input.InteractEvent += Raycast;
-        input.InteractCancelledEvent += HandleInteractCancelled;
+        input.ContinueInteractionEvent += Raycast;
+    }
+    private void OnDisable()
+    {
+        input.MoveEvent -= HandleMove;
+        input.InteractEvent -= Raycast;
+        input.ContinueInteractionEvent -= Raycast;
     }
     private void Raycast()
     {
@@ -24,14 +35,7 @@ public class Interactor : MonoBehaviour
         PerformRaycast();
         InteractWithInteractable();
     }
-    private void HandleInteract()
-    {
-        IsInteracting = true;
-    }
-    private void HandleInteractCancelled()
-    {
-        IsInteracting = false;
-    }
+
     private void HandleMove(Vector2 dir)
     {
         moveDirection = dir;
@@ -58,13 +62,19 @@ public class Interactor : MonoBehaviour
     private void PerformRaycast()
     {
         raycastHit = Physics2D.Raycast(rayObject.transform.position, raycastDirection, rayDistance, contactFilter);
+        if (raycastHit == true)
+        {
+            Vector3 objPosition = raycastHit.transform.position;       
+        }
     }
     private void Update()
     {
         MoveDirection();
         Physics2D.Raycast(rayObject.transform.position, raycastDirection, rayDistance, contactFilter);
-        Debug.DrawRay(rayObject.transform.position, raycastDirection * rayDistance, Color.red);
+        Debug.DrawRay(rayObject.transform.position, raycastDirection * rayDistance, Color.red);       
     }
+
+
     private void InteractWithInteractable()
     {
         if (raycastHit.collider != null)

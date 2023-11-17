@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4e66de3fe25b5c848896e6a78df78d27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 1463160843987277956}
   - component: {fileID: 640142887523521177}
   - component: {fileID: 7923728277628519073}
+  - component: {fileID: 3066150815915440192}
+  - component: {fileID: 3715365407096259201}
   m_Layer: 0
   m_Name: Potato
   m_TagString: Untagged
@@ -111,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3059249065305830713}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.22, y: -0.6907151, z: 2.0207825}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -193,4 +195,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224a91c14ae15894abb372b7fb46a4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7cdab279-b871-44f3-afd8-199f8013ca69
+  _id: 0189f065-46f4-4822-9124-1407a40e5908
+--- !u!114 &3066150815915440192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059249065305830713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082e99dbb9d8e9949ab4393da640fdb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 30950e6f-69ad-4aa8-bbba-23e56fba102d
+--- !u!114 &3715365407096259201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059249065305830713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082e99dbb9d8e9949ab4393da640fdb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 6260a732-d6e9-4695-9ba1-5bc5fb1d37c6

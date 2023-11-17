@@ -23,6 +23,7 @@ namespace BuildingSystem
             input.MousePositionBuildingEvent += MousePosition;
             input.PerformActionEvent += PerformAction;
             input.CancelActionEvent += CancelAction;
+            input.ExitBuildingEvent += BuildingExit;
         }
 
         private void OnDisable()
@@ -30,6 +31,7 @@ namespace BuildingSystem
             input.MousePositionBuildingEvent -= MousePosition;
             input.PerformActionEvent -= PerformAction;
             input.CancelActionEvent -= CancelAction;
+            input.ExitBuildingEvent -= BuildingExit;
         }
         private void MousePosition(Vector2 mousePos)
         {
@@ -73,6 +75,12 @@ namespace BuildingSystem
                 }
             }
 
+        }
+
+        public void BuildingExit()
+        {
+            ActiveBuildable = null;
+            ActiveBuildableChanged?.Invoke();
         }
 
         public void SetActiveBuildable(BuildableItem item)
