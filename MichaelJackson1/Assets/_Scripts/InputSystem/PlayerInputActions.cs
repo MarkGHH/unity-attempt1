@@ -800,6 +800,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""ce307746-77f0-4da9-8523-6f0f6a24e30d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -868,6 +877,116 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Exit Building"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48acb142-1990-4448-868d-01a67f4ef181"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""0dd3195c-d07c-4603-b844-70a5d7bee95c"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""fc0175dc-be1c-452a-b3ad-694f2eb6b3ef"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2b0b6a01-20df-455d-8040-2422b7dbc313"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b9e92d46-884d-46ce-8985-ae5fc7730856"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8e7124db-8e0c-490c-b863-b0d63e8856fe"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a27503bd-c420-4d17-bbe2-b82634ef6337"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9dd1ebc0-5afb-4ece-abbb-90d862046ed4"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c7ced673-bcd7-4ef4-8385-211fae417b38"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7bd7ac31-a03e-430b-86a1-02d7b1dcf2b9"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -975,6 +1094,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Building_NextItem = m_Building.FindAction("Next Item", throwIfNotFound: true);
         m_Building_PreviousItem = m_Building.FindAction("Previous Item", throwIfNotFound: true);
         m_Building_ExitBuilding = m_Building.FindAction("Exit Building", throwIfNotFound: true);
+        m_Building_Move = m_Building.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1364,6 +1484,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Building_NextItem;
     private readonly InputAction m_Building_PreviousItem;
     private readonly InputAction m_Building_ExitBuilding;
+    private readonly InputAction m_Building_Move;
     public struct BuildingActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1374,6 +1495,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @NextItem => m_Wrapper.m_Building_NextItem;
         public InputAction @PreviousItem => m_Wrapper.m_Building_PreviousItem;
         public InputAction @ExitBuilding => m_Wrapper.m_Building_ExitBuilding;
+        public InputAction @Move => m_Wrapper.m_Building_Move;
         public InputActionMap Get() { return m_Wrapper.m_Building; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1401,6 +1523,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ExitBuilding.started += instance.OnExitBuilding;
             @ExitBuilding.performed += instance.OnExitBuilding;
             @ExitBuilding.canceled += instance.OnExitBuilding;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
         }
 
         private void UnregisterCallbacks(IBuildingActions instance)
@@ -1423,6 +1548,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ExitBuilding.started -= instance.OnExitBuilding;
             @ExitBuilding.performed -= instance.OnExitBuilding;
             @ExitBuilding.canceled -= instance.OnExitBuilding;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
         }
 
         public void RemoveCallbacks(IBuildingActions instance)
@@ -1528,5 +1656,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnNextItem(InputAction.CallbackContext context);
         void OnPreviousItem(InputAction.CallbackContext context);
         void OnExitBuilding(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
     }
 }

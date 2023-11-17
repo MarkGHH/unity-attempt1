@@ -1,8 +1,8 @@
+using Extensions;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Object = UnityEngine.Object;
 
 namespace BuildingSystem
 {
@@ -19,6 +19,25 @@ namespace BuildingSystem
             ParentTilemap = tilemap;
             Coordinates = coordinates;
             GameObject = obj;
+        }
+
+        public void Destroy()
+        {
+            if (GameObject != null)
+            {
+                Object.Destroy(GameObject);
+            }
+            ParentTilemap.SetTile(Coordinates, null);
+        }
+
+        public void IterateCollisionSpace(RectIntExtensions.RectAction action)
+        {
+            BuildableType.CollisionSpace.Iterate(Coordinates, action);
+        }
+
+        public bool IterateCollisionSpace(RectIntExtensions.RectActionBool action)
+        {
+            return BuildableType.CollisionSpace.Iterate(Coordinates, action);
         }
     }
 }

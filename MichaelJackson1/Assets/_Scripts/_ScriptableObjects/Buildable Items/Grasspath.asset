@@ -16,3 +16,5 @@ MonoBehaviour:
   <Tile>k__BackingField: {fileID: 11400000, guid: d9007f52a32d8604b8b0bd4a3c10275f, type: 2}
   <TileOffset>k__BackingField: {x: 0, y: 0, z: 0}
   <PreviewSprite>k__BackingField: {fileID: -1986029704, guid: 9d588ccce97bf8f469b0b95938d2535d, type: 3}
+  <UiIcon>k__BackingField: {fileID: -1986029704, guid: 5d14cf0bd398605428ff63681de119f6, type: 3}
+  <GameObject>k__BackingField: {fileID: 0}
