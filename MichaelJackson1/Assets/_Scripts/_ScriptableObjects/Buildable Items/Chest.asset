@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Chest
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Chest
-  <Tile>k__BackingField: {fileID: 0}
+  <Tile>k__BackingField: {fileID: 11400000, guid: fc625de0b09e9d44ea237c3feb4391d5, type: 2}
   <TileOffset>k__BackingField: {x: 0, y: 1, z: 0}
   <PreviewSprite>k__BackingField: {fileID: -248489345, guid: 5d14cf0bd398605428ff63681de119f6, type: 3}
-  <UiIcon>k__BackingField: {fileID: -248489345, guid: 9d588ccce97bf8f469b0b95938d2535d, type: 3}
+  <UiIcon>k__BackingField: {fileID: -248489345, guid: 5d14cf0bd398605428ff63681de119f6, type: 3}
   <GameObject>k__BackingField: {fileID: 2871966205491671227, guid: e193d325f5ed024428b4894ea7a028ab, type: 3}
   <CollisionSpace>k__BackingField:
     x: 0
     y: 0
-    width: 2
-    height: 2
-  <UseCustomCollisionSpace>k__BackingField: 1
+    width: 0
+    height: 0
+  <UseCustomCollisionSpace>k__BackingField: 0
