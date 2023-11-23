@@ -14,10 +14,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private bool canDash = true;
 
-    private Vector2 moveDirection;
+    public Vector2 moveDirection;
 
     private TrailRenderer tr;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
     [SerializeField] public InputReader input;

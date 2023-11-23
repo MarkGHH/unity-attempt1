@@ -6,21 +6,21 @@ namespace BuildingSystem
     public class BuildingPlacer : MonoBehaviour
     {
         [field: SerializeField] public BuildableItem ActiveBuildable { get; private set; }
-        [SerializeField] private float maxBuildingDistance = 3f;
+        [SerializeField] public float maxBuildingDistance = 3f;
         [SerializeField] private ConstructionLayer constructionLayer;
         [SerializeField] private PreviewLayer previewLayer;
 
         private InputReader input;
         private bool rmbDown;
         private bool lmbDown;
-        private Vector2 mousePositionWorld;
+        public Vector2 mousePositionWorld;
 
         public event Action ActiveBuildableChanged;
 
         private void Awake()
         {
             input = gameObject.GetComponent<PlayerMovement>().input;
-            input.MousePositionBuildingEvent += MousePosition;
+            input.MousePositionBuildingEvent += MousePositionBuild;
             input.PerformActionEvent += PerformAction;
             input.CancelActionEvent += CancelAction;
             input.ExitBuildingEvent += BuildingExit;
@@ -28,15 +28,16 @@ namespace BuildingSystem
 
         private void OnDisable()
         {
-            input.MousePositionBuildingEvent -= MousePosition;
+            input.MousePositionBuildingEvent -= MousePositionBuild;
             input.PerformActionEvent -= PerformAction;
             input.CancelActionEvent -= CancelAction;
             input.ExitBuildingEvent -= BuildingExit;
         }
-        private void MousePosition(Vector2 mousePos)
+        private void MousePositionBuild(Vector2 mousePos)
         {
             mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePos);
         }
+
         private void CancelAction(bool isPressed)
         {
             rmbDown = isPressed;
@@ -47,7 +48,7 @@ namespace BuildingSystem
             lmbDown = isPressed;
         }
 
-        private bool IsMouseWithinBuildableRange()
+        public bool IsMouseWithinBuildableRange()
         {
             return Vector3.Distance(mousePositionWorld, transform.position) <= maxBuildingDistance;
         }

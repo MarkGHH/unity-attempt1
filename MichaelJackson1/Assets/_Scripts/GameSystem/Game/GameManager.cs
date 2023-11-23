@@ -5,12 +5,17 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    public GameObject player;
     [SerializeField] private InputReader input;
     [SerializeField] private GameObject UIMenu; // Should contain the UI
     [SerializeField] private GameObject buildingMenu; // Should contain the UI
 
     private void Awake()
     {
+        instance = this;
+
         UIMenu.SetActive(false);
         input.UIModeEvent += HandleEnterUI;
         input.ExitUIEvent += HandleExitUI;

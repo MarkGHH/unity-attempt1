@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    public float PickUpRadius = 1f;
+    private float PickUpRadius = 3f;
+    private float PickUpSpeed = 8f;
     public InventoryItemData ItemData;
     private BoxCollider2D myCollider;
 
     [SerializeField] public ItemPickUpSaveData itemSaveData;
     private string staticID;
+    private Transform playerTransform;
+    private PlayerInventoryHolder playerInventory;
 
     private void Awake() // On awake gets the box collider of the item and sets a radius in which the collision is triggered
     {
@@ -26,11 +29,8 @@ public class ItemPickUp : MonoBehaviour
     {
         staticID = GetComponent<StaticUniqueID>().ID;
         SaveGameManager.data.activeItems.Add(staticID, itemSaveData);
-    }
-
-    private void LoadGame(SaveData data)
-    {
-        if (data.collectedItems.Contains(staticID)) Destroy(this.gameObject);
+        playerTransform = GameManager.instance.player.transform;
+        playerInventory = GameManager.instance.player.GetComponentInParent<PlayerInventoryHolder>();
     }
 
     private void OnDestroy()
@@ -39,9 +39,20 @@ public class ItemPickUp : MonoBehaviour
         SaveLoad.OnLoadGame -= LoadGame;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) // On trigger of the collider, check whether the collider had an inventory, if it does add the item to the inventory and destroy the gameobject this script is attached to
+    private void Update()
     {
-        var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+
+
+        if (distance > PickUpRadius) return;
+        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, PickUpSpeed * Time.deltaTime);
+        if (distance < 0.1f) PickUpItem();
+
+    }
+
+    private void PickUpItem()
+    {
+        var inventory = playerInventory;
 
         if (!inventory) return;
 
@@ -52,6 +63,11 @@ public class ItemPickUp : MonoBehaviour
             Destroy(this.gameObject);
 
         }
+    }
+
+    private void LoadGame(SaveData data)
+    {
+        if (data.collectedItems.Contains(staticID)) Destroy(this.gameObject);
     }
 }
 

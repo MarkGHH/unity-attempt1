@@ -16,5 +16,5 @@ MonoBehaviour:
   Icon: {fileID: -1658858302, guid: f2430cc7b1a1c81468d34a388921183e, type: 3}
   maxStackSize: 1
   displayName: Tomato
-  typeName: Very juicy
+  typeName: Fruit
   ItemPrefab: {fileID: 5563264398002619618, guid: eb0d494652b897940829d4279010c65d, type: 3}

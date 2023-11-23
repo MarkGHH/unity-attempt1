@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Grasspath
   m_EditorClassIdentifier: 
   <Name>k__BackingField: grasspath
-  <Tile>k__BackingField: {fileID: 11400000, guid: d9007f52a32d8604b8b0bd4a3c10275f, type: 2}
+  <Tile>k__BackingField: {fileID: 11400000, guid: 0b930d6b4d4809746995251d204b0b30, type: 2}
   <TileOffset>k__BackingField: {x: 0, y: 0, z: 0}
-  <PreviewSprite>k__BackingField: {fileID: -1986029704, guid: 9d588ccce97bf8f469b0b95938d2535d, type: 3}
-  <UiIcon>k__BackingField: {fileID: -1986029704, guid: 5d14cf0bd398605428ff63681de119f6, type: 3}
+  <PreviewSprite>k__BackingField: {fileID: -1549840931, guid: 04b1c8ea58aa45f458fe700ec28ccee4, type: 3}
+  <UiIcon>k__BackingField: {fileID: -1549840931, guid: 04b1c8ea58aa45f458fe700ec28ccee4, type: 3}
   <GameObject>k__BackingField: {fileID: 0}
+  <CollisionSpace>k__BackingField:
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  <UseCustomCollisionSpace>k__BackingField: 0
