@@ -18,6 +18,7 @@ public class ItemData : ScriptableObject // Decides what data can be attributed 
     public GameObject ItemPrefab;
     public ToolAction onAction;
     public ToolAction onTileMapAction;
+    public ToolAction onItemUsed;
 }
 
 public enum ItemType

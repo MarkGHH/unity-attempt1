@@ -13,6 +13,12 @@ public class ToolAction : ScriptableObject
         Debug.LogWarning("OnApplyToTileMap is not implemented");
         return true;
     }
+
+    public virtual void OnItemUsed(InventoryDisplay inventoryDisplay, InventorySlot slot, InventorySlot_UI slotUI)
+    {
+        Debug.LogWarning("OnItemUsed is not implemented");
+        return;
+    }
 }
 
 

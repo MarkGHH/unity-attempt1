@@ -25,19 +25,6 @@ public class InventoryUIController : MonoBehaviour
         InventoryHolder.OnDynamicInventoryDisplayRequested -= DisplayInventory;
         PlayerInventoryHolder.OnPlayerInventoryDisplayRequested -= DisplayPlayerInventory;
     }
-
-    /*void Update() // old input system, how should this work?? test at a later stage and adjust
-    {
-        if (inventoryPanel.gameObject.activeInHierarchy && Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            inventoryPanel.gameObject.SetActive(false);
-        }
-        if (playerBackpackPanel.gameObject.activeInHierarchy && Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            playerBackpackPanel.gameObject.SetActive(false);
-        }
-    }*/
-
     // Opening inventory and chests
     void DisplayInventory(InventorySystem invToDisplay, int offset, bool isOpen)
     {

@@ -39,7 +39,9 @@ public class InventorySlot_UI : MonoBehaviour
 
     public void UpdateUISlot(InventorySlot slot) // Update the UI slot and pass in the inventory slot to display on the UI
     {
-        if (slot.ItemData != null)
+        if (slot.StackSize <= 0) ClearSlot();
+        
+        else if (slot.ItemData != null)
         {
             itemSprite.sprite = slot.ItemData.Icon;
             itemSprite.color = Color.white;
@@ -64,7 +66,9 @@ public class InventorySlot_UI : MonoBehaviour
         itemSprite.sprite = null;
         itemSprite.color = Color.clear;
         itemCount.text = "";
+        Debug.Log("1");
     }
+
     public void OnUISlotClick() // Track whether the slot is clicked
     {
         ParentDisplay?.SlotClicked(this);

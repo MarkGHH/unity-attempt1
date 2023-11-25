@@ -13,4 +13,12 @@ public class SeedTile : ToolAction
         tilemapReader.cropManager.Seed(gridPosition);
         return true;
     }
+
+    public override void OnItemUsed(InventoryDisplay inventoryDisplay, InventorySlot slot, InventorySlot_UI slotUI)
+    {
+        slot.RemoveFromStack(1); // Reduce by 1
+        inventoryDisplay.UpdateHotbarSlot(slot); // Update hotbar
+        slotUI.UpdateUISlot(slot); // Update InventorySlot
+        return;
+    }
 }

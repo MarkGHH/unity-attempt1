@@ -28,6 +28,19 @@ public abstract class InventoryDisplay : MonoBehaviour
             }
         }
     }
+
+    public void UpdateHotbarSlot(InventorySlot updatedSlot)
+    {
+        {
+            foreach (var slot in slotDictionary)
+            {
+                if (slot.Value == updatedSlot) // Slot value = the inventory slot from the system
+                {
+                    slot.Key.UpdateUISlot(updatedSlot); // Slot Key = the UI representation of the value
+                }
+            }
+        }
+    }
     public void SlotClicked(InventorySlot_UI clickedUISlot)
     {
         bool isShiftPressed = Keyboard.current.leftShiftKey.isPressed; // Old input system!!!!!!!!!!!!

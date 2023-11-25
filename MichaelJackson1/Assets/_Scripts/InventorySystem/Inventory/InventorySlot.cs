@@ -55,7 +55,7 @@ public class InventorySlot
     }
     public void RemoveFromStack(int amount) // Remove a given amount from the selected slot
     {
-        stackSize -= amount; 
+        stackSize -= amount;
     }
     public bool SplitStack(out InventorySlot splitStack) // Is there enough to actually split? If not, return false
     {

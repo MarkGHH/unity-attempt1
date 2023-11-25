@@ -4,12 +4,18 @@ public class ToolController : MonoBehaviour
 {
     public InputReader input;
     Animator animator;
-    [SerializeField] HotbarDisplay hotbarDisplay;
+
     private Vector2 mousePosition;
     [SerializeField] MarkerManager markerManager;
     [SerializeField] TilemapReader tilemapReader;
+
+    [SerializeField] InventoryDisplay inventoryDisplay;
+    [SerializeField] InventorySlot_UI inventorySlot_UI;
+    [SerializeField] HotbarDisplay hotbarDisplay;
+
     private float maxUseDistance = 2f;
     private ItemData currentItem;
+    private InventorySlot currentSlot;
 
     Vector3Int selectedTilePosition;
     bool selectable;
@@ -58,27 +64,43 @@ public class ToolController : MonoBehaviour
 
     private void UseTool(bool obj)
     {
-        if (obj)
+        if (obj) 
+        { 
             currentItem = hotbarDisplay.CurrentItem();
-        {
+            currentSlot = hotbarDisplay.CurrentSlot();
             if (currentItem != null)
             {
-                if (currentItem.onAction != null) UseToolWorld();
-                else if (currentItem.onTileMapAction != null && selectable) UseToolGrid();
+                if (currentItem.onAction != null) UseToolWorld(currentItem, currentSlot);
+                else if (currentItem.onTileMapAction != null && selectable) UseToolGrid(currentItem, currentSlot);
             }
         }
     }
-    private void UseToolWorld()
+    private void UseToolWorld(ItemData currentItem, InventorySlot currentSlot)
     {
         Vector2 characterPosition = transform.position;
-        hotbarDisplay.CurrentItem().onAction.OnApply(characterPosition);
+        bool completed = currentItem.onAction.OnApply(characterPosition);
         animator.SetTrigger("Act");
+
+        if (completed)
+        {
+            if (currentItem.onItemUsed != null)
+            {
+                currentItem.onTileMapAction.OnItemUsed(inventoryDisplay, currentSlot, inventorySlot_UI);
+            }
+        }
     }
 
-    private void UseToolGrid()
+    private void UseToolGrid(ItemData currentItem, InventorySlot currentSlot)
     {
-        hotbarDisplay.CurrentItem().onTileMapAction.OnApplyToTileMap(selectedTilePosition, tilemapReader);
-        hotbarDisplay.CurrentSlot().RemoveFromStack(1);
+        bool completed = currentItem.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tilemapReader);
         animator.SetTrigger("Act");
+
+        if (completed) 
+        { 
+            if (currentItem.onItemUsed != null)
+            {
+                currentItem.onTileMapAction.OnItemUsed(inventoryDisplay, currentSlot, inventorySlot_UI);
+            }
+        }
     }
 }
