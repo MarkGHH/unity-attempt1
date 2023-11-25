@@ -78,6 +78,7 @@ public class ToolController : MonoBehaviour
     private void UseToolGrid()
     {
         hotbarDisplay.CurrentItem().onTileMapAction.OnApplyToTileMap(selectedTilePosition, tilemapReader);
+        hotbarDisplay.CurrentSlot().RemoveFromStack(1);
         animator.SetTrigger("Act");
     }
 }

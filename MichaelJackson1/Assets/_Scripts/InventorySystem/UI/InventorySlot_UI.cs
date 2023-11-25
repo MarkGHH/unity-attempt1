@@ -69,5 +69,4 @@ public class InventorySlot_UI : MonoBehaviour
     {
         ParentDisplay?.SlotClicked(this);
     }
-
 }

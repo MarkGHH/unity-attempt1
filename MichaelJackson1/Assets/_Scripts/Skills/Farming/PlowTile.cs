@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Data/Tool Action/Plow")]
+[CreateAssetMenu(menuName = "Data/Tool action/Plow")]
 public class PlowTile : ToolAction
 {
     [SerializeField] List<TileBase> canPlow;
