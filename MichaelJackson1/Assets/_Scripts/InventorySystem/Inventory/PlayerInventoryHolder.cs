@@ -41,7 +41,7 @@ public class PlayerInventoryHolder : InventoryHolder
             OnPlayerInventoryChanged?.Invoke();
         }
     }
-    public bool AddToInventory(InventoryItemData data, int amount) // Attempt to add the item to the primary inventory system, which is attached to the player of type InventorySystem
+    public bool AddToInventory(ItemData data, int amount) // Attempt to add the item to the primary inventory system, which is attached to the player of type InventorySystem
     {
         if (primaryInventorySystem.AddToInventory(data, amount)) return true;
 

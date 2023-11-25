@@ -4,11 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public class InventorySlot
 {
-    [SerializeField] private InventoryItemData itemData; // Reference to the item data
+    [SerializeField] private ItemData itemData; // Reference to the item data
     [SerializeField] private int stackSize; // Current stack size - how many of the item do we have?
-    public InventoryItemData ItemData => itemData;
+    public ItemData ItemData => itemData;
     public int StackSize => stackSize;
-    public InventorySlot(InventoryItemData source, int amount) // Constructor to make an occupied inventory slot
+    public InventorySlot(ItemData source, int amount) // Constructor to make an occupied inventory slot
     {
         itemData = source;
         stackSize = amount;
@@ -33,7 +33,7 @@ public class InventorySlot
             AddToStack(invSlot.stackSize);
         }
     }
-    public void UpdateInventorySlot(InventoryItemData data, int amount) // Updates slot directly
+    public void UpdateInventorySlot(ItemData data, int amount) // Updates slot directly
     {
         itemData = data; 
         stackSize = amount; 

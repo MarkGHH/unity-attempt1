@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeCut : ToolHit
+[RequireComponent(typeof(BoxCollider2D))]
+public class ResourceNode : ToolHit
 {
     [SerializeField] GameObject ItemPickUp;
     [SerializeField] int dropCount = 5;
-    [SerializeField] float spread = 0.7f;
+    [SerializeField] float spread = 1f;
+    [SerializeField] ResourceNodeType nodeType;
     public override void Hit()
     {
         while (dropCount > 0)
@@ -22,5 +24,10 @@ public class TreeCut : ToolHit
             go.transform.position = position;   
         }
         Destroy(gameObject);
+    }
+
+    public override bool CanBeHit(List<ResourceNodeType> canBeHit)
+    {
+        return canBeHit.Contains(nodeType);
     }
 }

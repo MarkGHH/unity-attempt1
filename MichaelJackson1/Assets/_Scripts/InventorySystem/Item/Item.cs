@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// This is a scriptable object, that defines what an item is in our game.
 /// It could be inherited from to have branched version of items, for example potions and equipment.
@@ -6,18 +8,23 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName ="Inventory System/Inventory Item")]
-public class InventoryItemData : ScriptableObject // Decides what data can be attributed to an item
+public class ItemData : ScriptableObject // Decides what data can be attributed to an item
 {
     public int ID;
     public Sprite Icon;
     public int maxStackSize;
     public string displayName;
-    public string typeName;
+    public ItemType ItemType;
     public GameObject ItemPrefab;
+    public ToolAction onAction;
+    public ToolAction onTileMapAction;
+}
 
-    public void UseItem()
-    {
-        
-    }
+public enum ItemType
+{
+    Loot,
+    Tool,
+    Weapon,
+    Consumable
 }
 

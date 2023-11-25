@@ -22,8 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     [SerializeField] public InputReader input;
 
-
-
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();

@@ -8,7 +8,6 @@ public class HotbarDisplay : StaticInventoryDisplay
     private float scrollDirection = 0f;
 
     [SerializeField] private InputReader input;
-
     private void Awake() // Subscribe/ unsubscribe to all events related to the hotbar
     {
         input.Hotbar1Event += Hotbar1;
@@ -21,7 +20,6 @@ public class HotbarDisplay : StaticInventoryDisplay
         input.Hotbar8Event += Hotbar8;
         input.Hotbar9Event += Hotbar9;
         input.Hotbar10Event += Hotbar10;
-        input.PerformActionEvent += UseItem;
         input.MouseWheelEvent += MouseWheel;
     }
     protected override void OnDisable()
@@ -37,7 +35,6 @@ public class HotbarDisplay : StaticInventoryDisplay
         input.Hotbar8Event -= Hotbar8;
         input.Hotbar9Event -= Hotbar9;
         input.Hotbar10Event -= Hotbar10;
-        input.PerformActionEvent -= UseItem;
         input.MouseWheelEvent -= MouseWheel;
     }
 
@@ -120,10 +117,15 @@ public class HotbarDisplay : StaticInventoryDisplay
     /// Use item should only work in case we are in the Gameplay action map, opening a backpack should enable a different input map where moving is still allowed but items cant be used, opening a chest should open a different input map where moving isnt allowed and items cant be used
     /// </summary>
 
-    private void UseItem(bool isPressed) // Call UseItem in case the slot is filled, from the scriptable object item data
+    /*public void UseItem(Vector2 worldPoint) // Call UseItem in case the slot is filled, from the scriptable object item data
     {
-        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) slots[_currentIndex].AssignedInventorySlot.ItemData.UseItem();
-    }
+        // If ItemType == Tool and isn't empty, use the tool
+        if (worldPoint != null)
+        {
+            slots[_currentIndex].AssignedInventorySlot.ItemData.onAction.OnApply(worldPoint);
+        }
+        return;
+    }*/
 
     private void ChangeIndex(int direction) // Change the index based on the mousewheel
     {
@@ -145,4 +147,10 @@ public class HotbarDisplay : StaticInventoryDisplay
         _currentIndex = newIndex;
         slots[_currentIndex].ToggleHighlight();
     }
+
+    public ItemData CurrentItem()
+    {
+        return slots[_currentIndex].AssignedInventorySlot.ItemData;
+    }
+
 }

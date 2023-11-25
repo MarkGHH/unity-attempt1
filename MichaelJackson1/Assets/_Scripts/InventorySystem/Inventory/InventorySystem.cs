@@ -20,7 +20,7 @@ public class InventorySystem
             InventorySlots.Add(new InventorySlot()); // Create inventory slots based on the amount of slots passed through from the inventory system attached to the game object (player/chest)
         }
     }
-    public bool AddToInventory(InventoryItemData itemToAdd, int amountToAdd) // When a player picks up an item
+    public bool AddToInventory(ItemData itemToAdd, int amountToAdd) // When a player picks up an item
     {
         if (ContainsItem(itemToAdd, out List<InventorySlot> invSlot)) // Check whether item exists in inventory already
         {
@@ -46,7 +46,7 @@ public class InventorySystem
         }
         return false;
     }
-    public bool ContainsItem(InventoryItemData itemToAdd, out List<InventorySlot> invSlot) // Do any of our slots have the item already in them?
+    public bool ContainsItem(ItemData itemToAdd, out List<InventorySlot> invSlot) // Do any of our slots have the item already in them?
     {
         invSlot = InventorySlots.Where(i => i.ItemData == itemToAdd).ToList(); // If they do, get a list of all of them that already do
         return invSlot != null; // If at least 1 stack is found of the item, return true otherwise return false (item not found)

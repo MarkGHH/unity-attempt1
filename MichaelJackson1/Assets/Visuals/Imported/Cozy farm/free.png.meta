@@ -134,13 +134,13 @@ TextureImporter:
       name: free_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
-        width: 208
-        height: 80
+        x: 143
+        y: 78
+        width: 33
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 2, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

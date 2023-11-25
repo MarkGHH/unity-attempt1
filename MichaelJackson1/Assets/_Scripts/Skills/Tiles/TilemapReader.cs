@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class TilemapReader : MonoBehaviour
 {
+    public CropsManager cropManager;
     [SerializeField] Tilemap tilemap;
     [SerializeField] List<TileData> tilesData;
     Dictionary<TileBase, TileData> dataFromTiles;

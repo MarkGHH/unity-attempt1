@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22860ab1a6f4b4a49ae1f256c3c5e03c, type: 3}
-  m_Name: Log
+  m_Name: Shovel
   m_EditorClassIdentifier: 
   ID: 0
-  Icon: {fileID: 1062776011, guid: 5d14cf0bd398605428ff63681de119f6, type: 3}
-  maxStackSize: 20
-  displayName: Log
-  typeName: 
-  ItemPrefab: {fileID: 5563264398002619618, guid: 2130ea4b5db88ba4daba6671106d4012, type: 3}
+  Icon: {fileID: 1737672109, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  maxStackSize: 1
+  displayName: Shovel
+  ItemType: 1
+  ItemPrefab: {fileID: 0}
+  onAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: 5bc3f09f12d13814688922b5e8bf658e, type: 2}

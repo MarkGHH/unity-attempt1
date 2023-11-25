@@ -7,7 +7,7 @@ public class ItemPickUp : MonoBehaviour
 {
     private float PickUpRadius = 3f;
     private float PickUpSpeed = 8f;
-    public InventoryItemData ItemData;
+    public ItemData ItemData;
     private BoxCollider2D myCollider;
 
     [SerializeField] public ItemPickUpSaveData itemSaveData;
@@ -74,10 +74,10 @@ public class ItemPickUp : MonoBehaviour
 [System.Serializable]
 public struct ItemPickUpSaveData
 {
-    public InventoryItemData ItemData;
+    public ItemData ItemData;
     public Vector2 Position;
 
-    public ItemPickUpSaveData(InventoryItemData itemData, Vector2 position)
+    public ItemPickUpSaveData(ItemData itemData, Vector2 position)
     {
         ItemData = itemData;
         Position = position;
